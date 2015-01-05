@@ -1,0 +1,9 @@
+./queries/q1_total_count_drug_interactions.rq
+./queries/q2_target_relation_antagonist_for_drug.rq
+./queries/q3_drug_instance_simplified.rq
+./queries/q4_drug_phase_for_migraine_and_manufacturer.rq
+./queries/q5_total_count_drugs_for_migraine_and_manufacturers.rq
+./queries/q6_drug_manufacturer_for_migraine.rq
+./queries/q7_drug_atc_level_for_migraine_and_manufacturers.rq
+./queries/q8_total_count_drugs_for_migraine.rq
+./queries/q9_drug_instance_uris.rq

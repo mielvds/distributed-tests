@@ -1,0 +1,48 @@
+# Get specific properties for the drug "Butalbital" to populate its summary instance view,
+# from both drugbank and chembl.
+#
+# A previous query (drug_instance_uris.rq) has already established the equivalence
+# between the drugbank and chembl uri, they are both included in the FILTER on ?real_id.
+#
+# The VALUES clause contains extra bindings for each property, which make it
+# more convenient to process the result afterwards. They come from a custom "lens"
+# structure that describes each instance view.
+#
+# Time: ~0.15s
+# Expected result: see drug_instance.csv
+
+PREFIX disq: <http://ns.ontoforce.com/2013/disqover#>
+SELECT ?graph (<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454> AS ?id) ?property ?property_value ?label ?lens ?property_rank ?group ?group_label ?renderer
+WHERE
+{
+  GRAPH ?graph
+  {
+    ?real_id ?property ?property_value
+  }
+  OPTIONAL
+  {
+    ?property_value disq:preferredLabel ?label
+  }
+  VALUES (?property ?lens ?property_rank ?group ?group_label ?group_rank ?renderer)
+  {
+    (<http://ns.ontoforce.com/2013/disqover#preferredLabel> <http://ns.ontoforce.com/configuration#drugChemicalLens> "1000"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF <http://ns.ontoforce.com/2013/disqover#blank>)
+    (<http://xmlns.com/foaf/0.1/depiction> <http://ns.ontoforce.com/configuration#drugChemicalLens> "5"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF <http://ns.ontoforce.com/2013/disqover#image>)
+    (<http://ns.ontoforce.com/ontologies/drugbank/drugName> <http://ns.ontoforce.com/configuration#drugChemicalLens> "9"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/synonym> <http://ns.ontoforce.com/configuration#drugChemicalLens> "20"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/drugType> <http://ns.ontoforce.com/configuration#drugChemicalLens> "30"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/group> <http://ns.ontoforce.com/configuration#drugChemicalLens> "40"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/description> <http://ns.ontoforce.com/configuration#drugChemicalLens> "50"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/indication> <http://ns.ontoforce.com/configuration#drugChemicalLens> "51"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/mechanismOfAction> <http://ns.ontoforce.com/configuration#drugChemicalLens> "57"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/integration_ontology#relatedTarget> <http://ns.ontoforce.com/configuration#drugChemicalLens> "58"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/brand> <http://ns.ontoforce.com/configuration#drugChemicalLens> "60"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/externalLink> <http://ns.ontoforce.com/configuration#drugChemicalLens> "80"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://www.w3.org/2000/01/rdf-schema#label> <http://ns.ontoforce.com/configuration#drugChemicalLens> "100"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://www.w3.org/2004/02/skos/core#altLabel> <http://ns.ontoforce.com/configuration#drugChemicalLens> "110"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/drugbank/originalId> <http://ns.ontoforce.com/configuration#drugChemicalLens> "150"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://ns.ontoforce.com/ontologies/integration_ontology#originalInstanceId> <http://ns.ontoforce.com/configuration#drugChemicalLens> "160"^^<http://www.w3.org/2001/XMLSchema#integer> UNDEF UNDEF UNDEF UNDEF)
+    (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> UNDEF UNDEF UNDEF UNDEF UNDEF UNDEF)
+  }
+  FILTER(?real_id IN(<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454>,<http://ns.ontoforce.com/datasets/drugbank/DB00241>))
+}
+ORDER BY ?group_rank ?property_rank

@@ -1,0 +1,31 @@
+# Get the top 15 manufacturers of drugs that have "migraine" in their description from drugbank.
+#
+# Time: ~0.6s
+# Expected result
+#   "val","vc"
+#   "Sandoz inc",11
+#   "Watson laboratories inc",9
+#   "Teva pharmaceuticals usa inc",9
+#   "Mylan pharmaceuticals inc",9
+#   "Roxane laboratories inc",7
+#   "Par pharmaceutical inc",6
+#   "Mutual pharmaceutical co inc",5
+#   "Usl pharma inc",4
+#   "Teva pharmaceuticals usa",4
+#   "Paddock laboratories inc",3
+#   "Lederle laboratories div american cyanamid co",3
+#   "Purepac pharmaceutical co",3
+#   "Novartis pharmaceuticals corp",3
+#   "Bedford laboratories",3
+#   "Wockhardt ltd",3
+
+SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
+WHERE
+{
+  ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> ?val.
+  ?id <materialization:containsText> "migraine".
+  ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ontoforce.com/ontologies/drugbank/Drug>.
+}
+GROUP BY ?val
+ORDER BY DESC(?vc)
+LIMIT 15

@@ -1,0 +1,43 @@
+{
+ "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+  },
+  "builders": [
+{
+  "type": "amazon-ebs",
+  "access_key": "{{user `aws_access_key`}}",
+  "secret_key": "{{user `aws_secret_key`}}",
+  "region": "us-east-1",
+  "source_ami": "ami-148a2c7c",
+  "instance_type": "c3.xlarge",
+  "ssh_username": "ubuntu",
+  "ami_name": "single-endpoint {{timestamp}}",
+  "tags": {
+    "OS_Version": "Ubuntu",
+    "Release": "Latest"
+  },
+  "launch_block_device_mappings": [{
+        "device_name": "/dev/sde",
+        "volume_size": 50,
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }]
+}],
+  
+  "provisioners": [
+  {
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get install -y git",
+      "export AWS_SECRET_KEY={{user `aws_secret_key`}}",
+      "export AWS_ACCESS_KEY={{user `aws_access_key`}}",
+      "echo \"export AWS_SECRET_KEY={{user `aws_secret_key`}}\" >> /home/ubuntu/.profile",
+      "echo \"export AWS_ACCESS_KEY={{user `aws_access_key`}}\" >> /home/ubuntu/.profile",
+      "git clone https://github.com/laurensdv/configuration_scripts_benchmarks.git",
+      "./configuration_scripts_benchmarks/0_build/base_setup.sh"
+      ]
+  }]
+}

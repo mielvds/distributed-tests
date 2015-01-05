@@ -1,0 +1,27 @@
+# Get the top ATC (level 1) codes for drugs having "migraine" in their description,
+# for certain manufacturers, from drugbank.
+#
+# Time: ~0.3s
+# Expected result:
+#   "val","vc"
+#   "http://ns.ontoforce.com/datasets/atc/N",7
+#   "http://ns.ontoforce.com/datasets/atc/C",5
+#   "http://ns.ontoforce.com/datasets/atc/S",2
+
+SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
+WHERE
+{
+  ?id <http://ns.ontoforce.com/ontologies/integration_ontology#atc_level1_code> ?val.
+  {
+    ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> "Watson laboratories inc"^^<http://www.w3.org/2001/XMLSchema#string>.
+  }
+  UNION
+  {
+    ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> "Sandoz inc"^^<http://www.w3.org/2001/XMLSchema#string>.
+  }
+  ?id <materialization:containsText> "migraine".
+  ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ontoforce.com/ontologies/drugbank/Drug>.
+}
+GROUP BY ?val
+ORDER BY DESC(?vc)
+LIMIT 15

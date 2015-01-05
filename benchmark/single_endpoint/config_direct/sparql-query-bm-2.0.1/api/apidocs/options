@@ -1,0 +1,35 @@
+-classpath
+'/Users/rvesse/Documents/Work/Code/sparql-query-bm/target/checkout/core/target/classes:/Users/rvesse/.m2/repository/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar:/Users/rvesse/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar:/Users/rvesse/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar:/Users/rvesse/.m2/repository/org/apache/httpcomponents/httpclient/4.2.6/httpclient-4.2.6.jar:/Users/rvesse/.m2/repository/org/apache/httpcomponents/httpcore/4.2.5/httpcore-4.2.5.jar:/Users/rvesse/.m2/repository/com/github/jsonld-java/jsonld-java/0.4/jsonld-java-0.4.jar:/Users/rvesse/.m2/repository/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar:/Users/rvesse/.m2/repository/org/apache/jena/jena-arq/2.11.2/jena-arq-2.11.2.jar:/Users/rvesse/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.3.0/jackson-annotations-2.3.0.jar:/Users/rvesse/.m2/repository/org/apache/httpcomponents/httpclient-cache/4.2.6/httpclient-cache-4.2.6.jar:/Users/rvesse/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.3.3/jackson-databind-2.3.3.jar:/Users/rvesse/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.3.3/jackson-core-2.3.3.jar:/Users/rvesse/.m2/repository/joda-time/joda-time/2.3/joda-time-2.3.jar:/Users/rvesse/.m2/repository/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar:/Users/rvesse/.m2/repository/org/apache/jena/jena-core/2.11.2/jena-core-2.11.2.jar:/Users/rvesse/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar:/Users/rvesse/.m2/repository/org/apache/jena/jena-iri/1.0.2/jena-iri-1.0.2.jar'
+-encoding
+'UTF-8'
+-overview
+'/Users/rvesse/Documents/Work/Code/sparql-query-bm/target/checkout/core/src/main/javadoc/overview.html'
+-protected
+-quiet
+-sourcepath
+'/Users/rvesse/Documents/Work/Code/sparql-query-bm/target/checkout/core/src/main/java:/Users/rvesse/Documents/Work/Code/sparql-query-bm/target/checkout/core/src/main/javadoc'
+-author
+-bottom
+'Copyright &#169; 2014. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/rvesse/Documents/Work/Code/sparql-query-bm/target/checkout/core/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'SPARQL Query Benchmarker - Core API 2.0.1 API'
+-group
+'Test Runners API' 'net.sf.sparql.benchmarking.options:net.sf.sparql.benchmarking.runners*:net.sf.sparql.benchmarking.monitoring:net.sf.sparql.benchmarking.parallel*'
+-group
+'Operations API' 'net.sf.sparql.benchmarking.operations*:net.sf.sparql.benchmarking.loader*:net.sf.sparql.benchmarking.stats*'
+-link
+'http://jena.apache.org/documentation/javadoc/arq'
+-link
+'http://jena.apache.org/documentation/javadoc/jena'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-use
+-version
+-windowtitle
+'SPARQL Query Benchmarker - Core API 2.0.1 API'

@@ -1,0 +1,15 @@
+# Get all uris used to represent the drug "Butalbital".
+#
+# Time: ~0.09s
+# Expected result:
+#   "id"
+#   "http://ns.ontoforce.com/datasets/drugbank/DB00241"
+#   "http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454"
+
+PREFIX disq: <http://ns.ontoforce.com/2013/disqover#>
+SELECT DISTINCT ?id
+WHERE
+{
+  <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454> disq:preferredUri ?pref.
+  ?id disq:preferredUri ?pref.
+}

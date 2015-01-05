@@ -1,0 +1,67 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# datasets = ["chebi", "dbpedia", "drugbank", "geonames", "jamendo", "kegg", "linkedmdb", "nytimes", "sp2b", "swdf"]
+
+endpoint_config = [{ "name" => "chebi", "ip" => "10.0.0.10", "datasets" => ["chebi"] },
+                    { "name" => "dbpedia", "ip" => "10.0.0.11", "datasets" => ["dbpedia"] },
+                    { "name" => "drugbank", "ip" => "10.0.0.12", "datasets" => ["drugbank"] },
+                    { "name" => "geonames", "ip" => "10.0.0.13", "datasets" => ["geonames"] },
+                    { "name" => "jamendo", "ip" => "10.0.0.14", "datasets" => ["jamendo"] },
+                    { "name" => "kegg", "ip" => "10.0.0.15", "datasets" => ["kegg"] },
+                    { "name" => "linkedmdb", "ip" => "10.0.0.16", "datasets" => ["linkedmdb"] },
+                    { "name" => "nytimes", "ip" => "10.0.0.17", "datasets" => ["nytimes"] },
+                    { "name" => "sp2b", "ip" => "10.0.0.18", "datasets" => ["sp2b"] },
+                    { "name" => "swdf", "ip" => "10.0.0.19", "datasets" => ["swdf"] }]
+
+$install_virtuoso = 'false'
+
+def provision_server (server, ds)
+	server.vm.provision "chef_solo" do |chef|
+		chef.json = {
+			:dataset => ds,
+			:install_virtuoso => $install_virtuoso
+		}
+
+		chef.cookbooks_path = "../chef/cookbooks"
+                chef.add_recipe "fedbench_virtuoso"
+        end
+end
+
+Vagrant.configure(2) do |config|
+	config.vm.box = "dummy"
+
+	config.vm.provider :aws do |aws, override|	
+		aws.access_key_id = ENV['AWS_ACCESS_KEY']
+    		aws.secret_access_key = ENV['AWS_ACCESS_KEY']
+#   		aws.session_token = "SESSION TOKEN"
+    		aws.keypair_name = "FedBench"
+		aws.region = "us-east-1"
+		
+		#aws.private_ip_address = "10.0.0.5"
+		aws.security_groups = ["sg-92e26ef7"]
+		aws.subnet_id = "subnet-f36e4ddb"
+#		aws.elastic_ip = "true"		
+		aws.associate_public_ip = "true"
+#    		aws.ami = "ami-9eaa1cf6"
+#		The following image has already virtuoso installed.
+		aws.ami = "ami-62e18d0a"
+
+		aws.instance_type = "c3.xlarge"
+    		override.ssh.username = "ubuntu"
+    		override.ssh.private_key_path = "FedBench.pem"
+  	
+	end
+
+	endpoint_config.each { |endpt| 
+		config.vm.define endpt do |server|
+			provision_server(server, endpt)
+		end
+	}
+
+#	datasets.each { |ds| 
+#		config.vm.define ds do |server|
+#			provision_server(server, ds)
+#		end
+#	}
+end

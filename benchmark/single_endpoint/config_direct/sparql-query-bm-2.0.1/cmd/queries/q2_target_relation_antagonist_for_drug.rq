@@ -1,0 +1,187 @@
+# Get the relations to targets where any of the drugs "Dihydroergotamine" and "Rizatriptan" are antagonist of.
+# We present chembl drugs we got from a previous query, while the relationships are in drugbank.
+#
+# Time: ~0.2s
+# Expected result:
+#   "id"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00320_318"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00320_436"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00320_725"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00320_885"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00953_511"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00953_725"
+#   "http://ns.ontoforce.com/datasets/drugbank/relations/DB00953_885"
+
+PREFIX disq: <http://ns.ontoforce.com/2013/disqover#>
+SELECT (?pref as ?identifier)
+WHERE
+{
+  {
+    SELECT ?id ?pref
+    WHERE
+    {
+      ?id <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+      ?id1 <http://ns.ontoforce.com/ontologies/drugbank/action> "agonist"^^<http://www.w3.org/2001/XMLSchema#string>.
+      ?id2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
+      FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/drugbank/DrugTransporterRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugTargetRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugEnzymeRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugCarrierRelation>, <http://rdf.ebi.ac.uk/terms/chembl#Activity>))
+      {
+        SELECT ?class ?id3 ?p
+        WHERE
+        {
+          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref
+          {
+            ?s ?p ?id3
+          }
+          UNION
+          {
+            ?id3 ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id3 a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id3 ?p
+        WHERE
+        {
+          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732>)
+          {
+            ?s ?p ?id3
+          }
+          UNION
+          {
+            ?id3 ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id3 a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id4 ?p
+        WHERE
+        {
+          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref
+          {
+            ?s ?p ?id4
+          }
+          UNION
+          {
+            ?id4 ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id4 a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id4 ?p
+        WHERE
+        {
+          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905>)
+          {
+            ?s ?p ?id4
+          }
+          UNION
+          {
+            ?id4 ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id4 a ?class.
+        }
+      }
+      ?id1 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+      ?id2 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+      ?id3 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+      ?id4 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+    }
+  }
+  UNION
+  {
+    SELECT ?id (?id as ?pref)
+    WHERE
+    {
+      ?id <http://ns.ontoforce.com/ontologies/drugbank/action> "agonist"^^<http://www.w3.org/2001/XMLSchema#string>.
+      ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
+      FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/drugbank/DrugTransporterRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugTargetRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugEnzymeRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugCarrierRelation>, <http://rdf.ebi.ac.uk/terms/chembl#Activity>))
+      {
+        SELECT ?class ?id ?p
+        WHERE
+        {
+          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred.
+          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred
+          {
+            ?s ?p ?id
+          }
+          UNION
+          {
+            ?id ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id ?p
+        WHERE
+        {
+          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732>)
+          {
+            ?s ?p ?id
+          }
+          UNION
+          {
+            ?id ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id ?p
+        WHERE
+        {
+          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred .
+          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred
+          {
+            ?s ?p ?id
+          }
+          UNION
+          {
+            ?id ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))). ?id a ?class.
+        }
+      }
+      UNION
+      {
+        SELECT ?class ?id ?p
+        WHERE
+        {
+          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905>)
+          {
+            ?s ?p ?id
+          }
+          UNION
+          {
+            ?id ?p ?s
+          }
+          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+          ?id a ?class.
+        }
+      }
+      OPTIONAL
+      {
+        ?id <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred.
+      }
+      FILTER(!BOUND(?preferred))
+    }
+  }
+}
+GROUP BY ?pref
+LIMIT 20

@@ -1,0 +1,32 @@
+# Count the number of distinct drugs that have "migraine" in their description,
+# for certain manufacturers, from drugbank.
+# Instances with different uris that should be considered the same, are counted twice.
+#
+# Time: ~0.3s
+# Expected result:
+#   "total_count"
+#   11
+
+SELECT (COUNT(DISTINCT ?pref) as ?total_count)
+WHERE
+{
+  SELECT DISTINCT ?pref
+  WHERE
+  {
+    {
+      ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?v
+    }
+    {
+      ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> "Watson laboratories inc"^^<http://www.w3.org/2001/XMLSchema#string>.
+    }
+    UNION
+    {
+      ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> "Sandoz inc"^^<http://www.w3.org/2001/XMLSchema#string>.
+    }
+    ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
+    FILTER (?facet_value_2 IN (<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>))
+    ?id <materialization:containsText> "migraine".
+    BIND(?id AS ?pref)
+  }
+  LIMIT 1000
+}

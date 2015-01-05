@@ -1,0 +1,55 @@
+# Get the number of drugs per development phase having "migraine"
+# in their description, for manufacturer "Sandoz inc".
+# Phases come from chembl, manufacturers come from drugbank.
+#
+# Time: ~0.4s
+# Expected result:
+#   "val","vc"
+#   4,11
+#   0,1
+
+SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
+WHERE
+{
+  ?original <http://rdf.ebi.ac.uk/terms/chembl#highestDevelopmentPhase> ?val.
+  {
+    SELECT ?original ?id
+    WHERE
+    {
+      ?original <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
+      ?original_1 ?facet_source_1 ?facet_value_1.
+      FILTER(?facet_source_1 = <http://ns.ontoforce.com/ontologies/drugbank/manufacturer>)
+      FILTER(?facet_value_1 = "Sandoz inc"^^<http://www.w3.org/2001/XMLSchema#string>)
+      ?original_2 ?facet_source_2 ?facet_value_2.
+      FILTER(?facet_source_2 = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
+      FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/dailymed/Drug>, <http://ns.ontoforce.com/ontologies/unii/Substance>, <http://ns.ontoforce.com/ontologies/pubmed/Chemical>, <http://ns.ontoforce.com/ontologies/hsdb/Compound>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMoleculeTarget>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/integration_ontology#DrugIntervention>, <http://rdf.ebi.ac.uk/terms/chembl#Synthetic>, <http://rdf.ebi.ac.uk/terms/chembl#NaturalProductDerived>, <http://rdf.ebi.ac.uk/terms/chembl#Inorganic>))
+      ?original_3 <materialization:containsText> "migraine".
+      ?original_1 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
+      ?original_2 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
+      ?original_3 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
+    }
+  }
+  UNION
+  {
+    SELECT ?original (?original as ?id)
+    WHERE
+    {
+      ?original ?facet_source_3 ?facet_value_3.
+      FILTER(?facet_source_3 = <http://ns.ontoforce.com/ontologies/drugbank/manufacturer>)
+      FILTER(?facet_value_3 = "Sandoz inc"^^<http://www.w3.org/2001/XMLSchema#string>)
+      ?original ?facet_source_4 ?facet_value_4.
+      FILTER(?facet_source_4 = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
+      FILTER (?facet_value_4 IN (<http://ns.ontoforce.com/ontologies/dailymed/Drug>, <http://ns.ontoforce.com/ontologies/unii/Substance>, <http://ns.ontoforce.com/ontologies/pubmed/Chemical>, <http://ns.ontoforce.com/ontologies/hsdb/Compound>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMoleculeTarget>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/integration_ontology#DrugIntervention>, <http://rdf.ebi.ac.uk/terms/chembl#Synthetic>, <http://rdf.ebi.ac.uk/terms/chembl#NaturalProductDerived>, <http://rdf.ebi.ac.uk/terms/chembl#Inorganic>))
+      ?original <materialization:containsText> "migraine".
+      OPTIONAL
+      {
+        ?original <http://ns.ontoforce.com/2013/disqover#preferredUri> ?identifier.
+      }
+      FILTER(!BOUND(?identifier))
+    }
+  }
+  ?original <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>.
+}
+GROUP BY ?val
+ORDER BY DESC(?vc)
+LIMIT 15

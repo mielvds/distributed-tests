@@ -1,0 +1,25 @@
+# Count the number of distinct drugs that have "migraine" in their description,
+# from drugbank and chembl.
+# Instances with different uris that should be considered the same, are counted twice.
+#
+# Time: ~0.6s to ~27s
+# Expected result:
+#   "total_count"
+#   32
+
+SELECT (COUNT(DISTINCT ?pref) as ?total_count)
+WHERE
+{
+  SELECT DISTINCT ?pref
+  WHERE
+  {
+    {
+      ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?v
+    }
+    ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_1.
+    FILTER (?facet_value_1 IN (<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>))
+    ?id <materialization:containsText> "migraine".
+    BIND(?id AS ?pref)
+  }
+  LIMIT 1000
+}
