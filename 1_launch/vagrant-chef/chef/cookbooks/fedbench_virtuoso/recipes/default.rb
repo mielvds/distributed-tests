@@ -34,11 +34,11 @@ bash "setup_virtuoso" do
 	fi
 
 	/vagrant/prepareAndMountDrives.sh
-        s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso.db.xz /mnt/drive1/virtuoso/virtuoso.db.xz
-        s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso-temp.db /mnt/drive2/virtuoso/virtuoso-temp.db
-        cd /mnt/drive1/virtuoso
-        xz -d virtuoso.db.xz
-        cp /vagrant/virtuoso.ini ./virtuoso.ini
+  s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso.db.xz /mnt/drive1/virtuoso/virtuoso.db.xz
+  s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso-temp.db /mnt/drive2/virtuoso/virtuoso-temp.db
+  cd /mnt/drive1/virtuoso
+  xz -d virtuoso.db.xz
+  cp /vagrant/virtuoso.ini ./virtuoso.ini
 	/usr/local/virtuoso-opensource/bin/virtuoso-t
 	EOH
 #	if [ ! -d /virtuoso-opensource ]; then
@@ -60,7 +60,7 @@ bash "setup_virtuoso" do
 #	EOH
 #	/usr/local/virtuoso-opensource/bin/virtuoso-t
 #	EOH
- 
+
 end
 
 #bash "done" do
