@@ -6,7 +6,7 @@ ARGS=3
 
 if [ $# -ne $ARGS ]
 then
-	echo "Usage: $0 <virtuoso-port> <data-file-path> <graph-name>"
+	echo "Usage: $0 <virtuoso-port> <data-folder-path> <graph-name>"
 	exit -1
 fi
 
@@ -17,7 +17,9 @@ PORT=$1
 
 echo "### Loading data into virtuoso..."
 
-isql-vt -S $PORT exec="DB.DBA.TTLP_MT(file_open ('$2'), '', '$3', 480, 0, 1)"
+isql-vt -S $PORT exec="ld_dir('$2', '%.ttl', '$3')"
+
+isql-vt -S $PORT exec="DB.DBA.rdf_loader_run();"
 
 # End
 ###########################################
