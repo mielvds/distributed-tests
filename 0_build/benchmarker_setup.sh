@@ -17,3 +17,7 @@ sudo /usr/sbin/update-locale
 sudo hostname benchmarker
 echo benchmarker | sudo tee /etc/hostname
 sudo sh -c "echo '127.0.0.1 benchmarker' >> /etc/hosts"
+
+cd
+cp ./configuration_scripts_benchmarks/benchmark/FedBench\ 3.0.zip ./
+unzip FedBench\ 3.0.zip
