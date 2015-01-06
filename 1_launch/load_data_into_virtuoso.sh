@@ -6,7 +6,7 @@ ARGS=3
 
 if [ $# -ne $ARGS ]
 then
-	echo "Usage: $0 <virtuoso-port> <data-path> <graph-name>"
+	echo "Usage: $0 <virtuoso-port> <data-file-path> <graph-name>"
 	exit -1
 fi
 
