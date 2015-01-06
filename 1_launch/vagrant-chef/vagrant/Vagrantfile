@@ -15,7 +15,7 @@ $install_virtuoso = 'false'
 def provision_server (config, endpt)
   config.vm.define endpt.name do |instance|
     instance.vm.provider :aws do |aws, override|
-      aws.private_ip_address = "10.0.0.5"
+      aws.private_ip_address = endpt.ip
     end
 
     instance.vm.provision "chef_solo" do |chef|
