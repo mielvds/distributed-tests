@@ -4,25 +4,25 @@
 require 'json'
 
 # Parse the json configuration
-settings = {}
+$settings = {}
 
-if File.exists?(File.expand_path "./config.json")
-  settings = JSON.parse(File.read(File.expand_path "./config.json"))
-fi
+if File.exists?(File.expand_path "./config-default.json")
+  $settings = JSON.parse(File.read(File.expand_path "./config-default.json"))
+end
 
 $install_virtuoso = 'false'
 
 def provision_server (config, endpt)
-  config.vm.define endpt.name do |instance|
+  config.vm.define endpt['name'] do |instance|
     instance.vm.provider :aws do |aws, override|
-      aws.private_ip_address = endpt.ip
+      aws.private_ip_address = endpt['ip']
     end
 
     instance.vm.provision "chef_solo" do |chef|
 		  chef.json = {
-			  :datasets => endpt.datasets,
+			  :datasets => endpt['datasets'],
 			  :install_virtuoso => $install_virtuoso,
-        :virtuoso => settings.virtuoso
+        :virtuoso => $settings['virtuoso']
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
@@ -32,29 +32,28 @@ def provision_server (config, endpt)
 end
 
 Vagrant.configure(2) do |config|
-	config.vm.box = "dummy"
+  config.omnibus.chef_version = :latest
 
+	config.vm.box = "dummy"
 	config.vm.provider :aws do |aws, override|
 		aws.access_key_id = ENV['AWS_ACCESS_KEY']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
 #   aws.session_token = "SESSION TOKEN"
-    aws.keypair_name = "FedBench"
+    aws.keypair_name = ENV['SSH_KEYNAME']
 		aws.region = "us-east-1"
 
-		aws.security_groups = settings.security_groups
-		aws.subnet_id = settings.subnet
+		aws.security_groups = $settings['security_groups']
+		aws.subnet_id = $settings['subnet']
 #		aws.elastic_ip = "true"
 		aws.associate_public_ip = "true"
 
 #		The following image has already virtuoso installed.
-		aws.ami = settings.ami
+		aws.ami = $settings['ami']
 
 		aws.instance_type = "c3.xlarge"
     override.ssh.username = "ubuntu"
-#   override.ssh.private_key_path = "FedBench.pem" #should not be necessary as aws key is given
+    override.ssh.private_key_path = ENV['SSH_KEY'] #should not be necessary as aws key is given
 	end
 
-	settings.endpoints.each { |endpt|
-		provision_server(config, endpt)
-	}
+	$settings['endpoints'].each { |endpt| provision_server(config, endpt) }
 end

@@ -1,6 +1,6 @@
 {
-"subnet": "subnet-f36e4ddb",
-"security_groups": ["sg-92e26ef7"],
+"subnet": "subnet-9bc563c2",
+"security_groups": ["sg-274ab743"],
 "ami": "ami-62e18d0a",
 "virtuoso": {
   "port": 1111,

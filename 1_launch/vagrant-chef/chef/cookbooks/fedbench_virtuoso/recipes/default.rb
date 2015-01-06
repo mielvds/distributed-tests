@@ -39,23 +39,12 @@ ini.save
 bash "setup_virtuoso" do
   code "/usr/local/virtuoso-opensource/bin/virtuoso-t"
   node['datasets'].each { | dataset |
-    code <<-EOH
-    ###########################################
-    # Load files
-
-    echo "### Loading data into virtuoso..."
-
-    isql-vt -S #{node['virtuoso']['port']} exec="ld_dir('#{dataset}', '%.ttl', '#{dataset}')"
-
-    EOH
+    puts ### Loading data into virtuoso...
+    code "isql-vt -S #{node['virtuoso']['port']} exec=\"ld_dir('#{dataset}', '%.ttl', '#{dataset}')\""
   }
-  code <<-EOH
-  isql-vt -S #{node['virtuoso']['port']} exec="DB.DBA.rdf_loader_run();"
 
-  # End
-  ###########################################
+  code "isql-vt -S #{node['virtuoso']['port']} exec=\"DB.DBA.rdf_loader_run();\""
 
-  echo "### Creating checkpoint for server $PORT..."
-  isql-vt -S #{node['virtuoso']['port']} exec="checkpoint"
-  EOH
+  puts "### Creating checkpoint for server #{node['virtuoso']['port']}..."
+  code "isql-vt -S #{node['virtuoso']['port']} exec=\"checkpoint\""
 end
