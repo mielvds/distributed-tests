@@ -2,6 +2,10 @@
 "subnet": "subnet-f36e4ddb",
 "security_groups": ["sg-92e26ef7"],
 "ami": "ami-62e18d0a",
+"virtuoso": {
+  "port": 1111,
+  "config": "/usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini"
+},
 "endpoints": [{
   "name": "chebi",
   "ip": "10.0.0.10",

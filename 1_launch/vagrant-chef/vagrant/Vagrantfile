@@ -21,7 +21,8 @@ def provision_server (config, endpt)
     instance.vm.provision "chef_solo" do |chef|
 		  chef.json = {
 			  :datasets => endpt.datasets,
-			  :install_virtuoso => $install_virtuoso
+			  :install_virtuoso => $install_virtuoso,
+        :virtuoso => settings.virtuoso
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
