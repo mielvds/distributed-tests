@@ -10,6 +10,8 @@ else
 fi
 
 single_endpoint_id=$(packer build single_endpoints_aws_s3_to_ebs.json | tail -1)
+echo single_endpoint
 echo $single_endpoint_id
 query_engine_id=$(packer build query_engine_aws.json | tail -1)
+echo query_engine
 echo $query_engine_id
