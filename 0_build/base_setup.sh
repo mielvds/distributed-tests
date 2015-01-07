@@ -50,3 +50,5 @@ sudo sh -c "echo 'singleinstance' > /etc/hostname"
 sudo mkdir /etc/sysconfig
 sudo touch /etc/sysconfig/network
 sudo sh -c "echo 'HOSTNAME=singleinstance.localdomain' >> /etc/sysconfig/network"
+
+cd

@@ -19,5 +19,6 @@ echo benchmarker | sudo tee /etc/hostname
 sudo sh -c "echo '127.0.0.1 benchmarker' >> /etc/hosts"
 
 cd
-cp ./configuration_scripts_benchmarks/benchmark/FedBench\ 3.0.zip ./
-unzip FedBench\ 3.0.zip
+cp ./configuration_scripts_benchmarks/benchmark/FedBench\ 3.0.zip /home/ubuntu/
+unzip FedBench\ 3.0.zip -d /home/ubuntu/FedBench\ 3.0/
+cd
