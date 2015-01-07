@@ -37,7 +37,7 @@ ini['Parameters']['DirsAllowed'] = "#{ini['Parameters']['DirsAllowed']},#{node['
 ini.save
 
 bash "setup_virtuoso" do
-  code "/usr/local/virtuoso-opensource/bin/virtuoso-t"
+  code "virtuoso-t -c #{node['virtuoso']['config']}"
   node['datasets'].each { | dataset |
     puts ### Loading data into virtuoso...
     code "isql-vt -S #{node['virtuoso']['port']} exec=\"ld_dir('#{dataset}', '%.ttl', '#{dataset}')\""

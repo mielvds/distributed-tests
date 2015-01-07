@@ -2,14 +2,15 @@
 "subnet": "subnet-9bc563c2",
 "security_groups": ["sg-274ab743"],
 "ami": "ami-62e18d0a",
+"ami_benchmarker": "",
 "virtuoso": {
-  "port": 1111,
-  "config": "/usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini"
+  "port": 1112,
+  "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini"
 },
 "endpoints": [{
   "name": "chebi",
   "ip": "10.0.0.10",
-  "datasets": ["chebi"]
+  "datasets": ["/data/chebi/"]
 }, {
   "name": "dbpedia",
   "ip": "10.0.0.11",

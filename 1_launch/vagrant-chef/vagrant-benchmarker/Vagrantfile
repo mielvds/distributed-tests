@@ -14,30 +14,7 @@ if File.exists?(File.expand_path "./config-default.json")
   $settings = JSON.parse(File.read(File.expand_path "./config-default.json"))
 end
 
-$install_virtuoso = 'false'
-
-def provision_server (config, endpt)
-  config.vm.define endpt['name'] do |instance|
-    instance.vm.provider :aws do |aws, override|
-      aws.private_ip_address = endpt['ip']
-    end
-
-    instance.vm.provision "chef_solo" do |chef|
-		  chef.json = {
-			  :datasets => endpt['datasets'],
-			  :install_virtuoso => $install_virtuoso,
-        :virtuoso => $settings['virtuoso']
-		  }
-
-		  chef.cookbooks_path = "../chef/cookbooks"
-      chef.add_recipe "fedbench_virtuoso"
-    end
-  end
-end
-
 Vagrant.configure(2) do |config|
-  config.omnibus.chef_version = :latest
-
 	config.vm.box = "dummy"
 	config.vm.provider :aws do |aws, override|
 		aws.access_key_id = ENV['AWS_ACCESS_KEY']
@@ -51,13 +28,12 @@ Vagrant.configure(2) do |config|
 #		aws.elastic_ip = "true"
 		aws.associate_public_ip = "true"
 
-#		The following image has already virtuoso installed.
-		aws.ami = $settings['ami']
+		aws.ami = $settings['ami_benchmarker']
 
 		aws.instance_type = "c3.xlarge"
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = ENV['SSH_KEY'] #should not be necessary as aws key is given
 	end
 
-	$settings['endpoints'].each { |endpt| provision_server(config, endpt) }
+  config.vm.define 'Benchmarker'
 end
