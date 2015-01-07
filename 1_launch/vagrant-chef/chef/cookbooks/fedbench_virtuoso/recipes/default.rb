@@ -1,8 +1,10 @@
 #
 # Cookbook Name:: fedbench_virtuoso
-# Recipe:: default
+# Recipe:: prepare_virtuoso
 #
 # Copyright (c) 2014 The Authors, All Rights Reserved.
+
+require 'inifile'
 
 # install the software we need
 %w(
@@ -21,50 +23,28 @@ git
 s3cmd
 ).each { | pkg | package pkg }
 
+# Open and read the virtuoso file
+ini = IniFile.load(node['virtuoso']['config'])
+
+# Read its current contents
+puts ini['Parameters']['DirsAllowed']
+
+# Edit the contents
+ini['Parameters']['DirsAllowed'] = "#{ini['Parameters']['DirsAllowed']},#{node['datasets'].join(",")}"
+
+# Save it back to disk
+# You don't need to provide the filename, it remembers the original name
+ini.save
+
 bash "setup_virtuoso" do
-  	code <<-EOH
-	if [ #{node['install_virtuoso']} == "true" ] && [ ! -d /virtuoso-opensource ]; then
-               mkdir /virtuoso-opensource
-               cd /virtuoso-opensource
-               git clone https://github.com/openlink/virtuoso-opensource.git /virtuoso-opensource
-               ./autogen.sh
-               ./configure
-       		make
-		make install
-	fi
+  code "/usr/local/virtuoso-opensource/bin/virtuoso-t"
+  node['datasets'].each { | dataset |
+    puts ### Loading data into virtuoso...
+    code "isql-vt -S #{node['virtuoso']['port']} exec=\"ld_dir('#{dataset}', '%.ttl', '#{dataset}')\""
+  }
 
-	/vagrant/prepareAndMountDrives.sh
-        s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso.db.xz /mnt/drive1/virtuoso/virtuoso.db.xz
-        s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['dataset']}/virtuoso-temp.db /mnt/drive2/virtuoso/virtuoso-temp.db
-        cd /mnt/drive1/virtuoso
-        xz -d virtuoso.db.xz
-        cp /vagrant/virtuoso.ini ./virtuoso.ini
-	/usr/local/virtuoso-opensource/bin/virtuoso-t
-	EOH
-#	if [ ! -d /virtuoso-opensource ]; then
-#		mkdir /virtuoso-opensource
-#		cd /virtuoso-opensource
-#		git clone https://github.com/openlink/virtuoso-opensource.git /virtuoso-opensource
-#		./autogen.sh
-#		./configure
-#		make
-#		make install
-#	fi
+  code "isql-vt -S #{node['virtuoso']['port']} exec=\"DB.DBA.rdf_loader_run();\""
 
-#	/vagrant/prepareAndMountDrives.sh
-#	s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['source']['name']}/virtuoso.db.xz /mnt/drive1/virtuoso/virtuoso.db.xz
-#	s3cmd -c /vagrant/.s3cfg get s3://fedbench/#{node['source']['name']}/virtuoso-temp.db /mnt/drive2/virtuoso/virtuoso-temp.db
-#	cd /mnt/drive1/virtuoso
-#	xz -d virtuoso.db.xz
-#	cp /vagrant/virtuoso.ini ./virtuoso.ini
-#	EOH
-#	/usr/local/virtuoso-opensource/bin/virtuoso-t
-#	EOH
- 
+  puts "### Creating checkpoint for server #{node['virtuoso']['port']}..."
+  code "isql-vt -S #{node['virtuoso']['port']} exec=\"checkpoint\""
 end
-
-#bash "done" do
-#code <<-EOH
-# echo aaa
-#EOH
-#end
