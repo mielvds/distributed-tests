@@ -8,10 +8,10 @@ $settings = {}
 
 if File.exists?(File.expand_path ENV['CONFIG_FILE'])
   $settings = JSON.parse(File.read(File.expand_path ENV['CONFIG_FILE']))
-end
-
-if File.exists?(File.expand_path "./config-default.json")
-  $settings = JSON.parse(File.read(File.expand_path "./config-default.json"))
+else
+  if File.exists?(File.expand_path "./config-default.json")
+    $settings = JSON.parse(File.read(File.expand_path "./config-default.json"))
+  end
 end
 
 $install_virtuoso = 'false'
@@ -20,6 +20,9 @@ def provision_server (config, endpt)
   config.vm.define endpt['name'] do |instance|
     instance.vm.provider :aws do |aws, override|
       aws.private_ip_address = endpt['ip']
+      aws.tags = {
+        'Name' => "FedBench endpoint - #{endpt['name']}"
+      }
     end
 
     instance.vm.provision "chef_solo" do |chef|

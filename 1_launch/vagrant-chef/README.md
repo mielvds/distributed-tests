@@ -7,7 +7,7 @@
 ## Usage ##
 
 - Add a dummy box to be used by the AWS provider: `vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box`
-- Launch Vagrant: `vagrant up`
+- Launch Vagrant: `vagrant up --provider=aws`
 - After the tests you can
     - terminate all the servers: vagrant destroy
     - shut down all the servers: vagrant halt
