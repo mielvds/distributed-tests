@@ -35,8 +35,10 @@
       "sudo apt-get install -y git",
       "export AWS_SECRET_KEY={{user `aws_secret_key`}}",
       "export AWS_ACCESS_KEY={{user `aws_access_key`}}",
+      "export AWS_S3_BUCKETNAME={{user `bucketname`}}",
       "echo \"export AWS_SECRET_KEY={{user `aws_secret_key`}}\" >> /home/ubuntu/.profile",
       "echo \"export AWS_ACCESS_KEY={{user `aws_access_key`}}\" >> /home/ubuntu/.profile",
+      "echo \"export AWS_S3_BUCKETNAME={{user `bucketname`}}\" >> /home/ubuntu/.profile",
       "git clone https://github.com/laurensdv/configuration_scripts_benchmarks.git",
       "./configuration_scripts_benchmarks/0_build/base_setup.sh",
       "./configuration_scripts_benchmarks/0_build/get_data_generic.sh {{user `bucketname`}}"	
