@@ -35,23 +35,32 @@ if File.exists?(File.expand_path node['virtuoso']['config'])
   # Read its current contents
   puts ini['Parameters']['DirsAllowed']
 
+  $port = ini['Parameters']['ServerPort']
+  puts "Port: #{$port}"
+
   # Save it back to disk
   # You don't need to provide the filename, it remembers the original name
   ini.save
 end
 
 bash "setup_virtuoso" do
-  code "#{node['virtuoso']['bin']}virtuoso-t -f -c #{node['virtuoso']['config']} "
+  code "#{node['virtuoso']['bin']}virtuoso-t -c #{node['virtuoso']['config']} "
 
-  sleep(30)
+  # service "myapp_service" do
+  #   supports :status => true, :restart => true
+  #   start_command "#{node['virtuoso']['bin']}virtuoso-t -f -c #{node['virtuoso']['config']} "
+  #   restart_command "/usr/lib/myapp/bin/myapp restart"
+  #   status_command "/usr/lib/myapp/bin/myapp status"
+  #   action [ :enable, :start ]
+  # end
 
   node['datasets'].each { | dataset |
     puts "### Loading #{dataset} into virtuoso..."
-    code "#{node['virtuoso']['bin']}isql -S #{node['virtuoso']['port']} exec=\"ld_dir('#{dataset}', '*.ttl', '#{dataset}')\""
+    code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"ld_dir('#{dataset}', '*.ttl', '#{dataset}')\""
   }
 
-  code "#{node['virtuoso']['bin']}isql -S #{node['virtuoso']['port']} exec=\"DB.DBA.rdf_loader_run();\""
+  code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"DB.DBA.rdf_loader_run();\""
 
-  puts "### Creating checkpoint for server #{node['virtuoso']['port']}..."
-  code "#{node['virtuoso']['bin']}isql -S #{node['virtuoso']['port']} exec=\"checkpoint\""
+  puts "### Creating checkpoint for server #{$port}..."
+  code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"checkpoint\""
 end

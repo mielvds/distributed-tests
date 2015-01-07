@@ -4,7 +4,8 @@
   "ami": "ami-62e18d0a",
   "ami_benchmarker": "ami-62e18d0a",
   "virtuoso": {
-    "port": 1112,
+    "user": "dba",
+    "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
     "bin": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/"
   },
