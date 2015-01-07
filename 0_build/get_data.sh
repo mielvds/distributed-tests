@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 wget https://s3.amazonaws.com/bmtriplesdata/configS3.txt /home/ubuntu/
 mv /home/ubuntu/configS3.txt /home/ubuntu/.s3cfg 
