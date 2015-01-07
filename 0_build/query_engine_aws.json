@@ -12,7 +12,7 @@
   "source_ami": "ami-148a2c7c",
   "instance_type": "c3.xlarge",
   "ssh_username": "ubuntu",
-  "ami_name": "query-engine {{timestamp}}",
+  "ami_name": "query-engine",
   "tags": {
     "OS_Version": "Ubuntu",
     "Release": "Latest"

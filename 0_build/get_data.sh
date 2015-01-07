@@ -1,4 +1,5 @@
 #!bin/bash
+
 wget https://s3.amazonaws.com/bmtriplesdata/configS3.txt /home/ubuntu/
 mv /home/ubuntu/configS3.txt /home/ubuntu/.s3cfg 
 sed -i 's/AWS_AK/'$AWS_ACCESS_KEY'/' .s3cfg
