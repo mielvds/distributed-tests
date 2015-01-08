@@ -1,16 +1,16 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-62e18d0a",
+  "ami": "ami-900273f8",
   "virtuoso": {
     "user": "dba",
     "pass": "dba",
-    "config": "/usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini",
-    "bin": "/usr/local/virtuoso-opensource/bin/"
+    "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
+    "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
   },
   "endpoints": [{
-    "name": "chebi",
-    "ip": "10.0.0.10",
-    "datasets": ["/data/chebi/"]
+    "name": "drugbank",
+    "ip": "10.0.0.21",
+    "datasets": ["/data/drugbank/"]
   }]
 }

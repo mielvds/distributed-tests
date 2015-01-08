@@ -43,24 +43,27 @@ if File.exists?(File.expand_path node['virtuoso']['config'])
   ini.save
 end
 
-bash "setup_virtuoso" do
-  code "#{node['virtuoso']['bin']}virtuoso-t -c #{node['virtuoso']['config']} "
+template "/etc/init.d/virtuoso" do
+  mode "0755"
+  source "init.erb"
+end
 
-  # service "myapp_service" do
-  #   supports :status => true, :restart => true
-  #   start_command "#{node['virtuoso']['bin']}virtuoso-t -f -c #{node['virtuoso']['config']} "
-  #   restart_command "/usr/lib/myapp/bin/myapp restart"
-  #   status_command "/usr/lib/myapp/bin/myapp status"
-  #   action [ :enable, :start ]
-  # end
+service "virtuoso" do
+  supports [ :stop, :start, :restart ]
+  action [ :enable, :start ]
+end
+
+bash "setup_virtuoso" do
+  # code "#{node['virtuoso']['bin']}virtuoso-t -c #{node['virtuoso']['config']} "
+  # code "sleep 20"
 
   node['datasets'].each { | dataset |
     puts "### Loading #{dataset} into virtuoso..."
-    code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"ld_dir('#{dataset}', '*.ttl', '#{dataset}')\""
+    code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"ld_dir('#{dataset}', '*.ttl', '#{dataset}');\""
   }
 
-  code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"DB.DBA.rdf_loader_run();\""
+  code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"rdf_loader_run();\""
 
   puts "### Creating checkpoint for server #{$port}..."
-  code "#{node['virtuoso']['bin']}isql #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"checkpoint\""
+  code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"checkpoint;\""
 end

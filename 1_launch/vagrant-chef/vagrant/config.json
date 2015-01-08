@@ -1,13 +1,13 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-62e18d0a",
+  "ami": "ami-900273f8",
   "ami_benchmarker": "ami-62e18d0a",
   "virtuoso": {
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
-    "bin": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/"
+    "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
   },
   "endpoints": [{
     "name": "chebi",
