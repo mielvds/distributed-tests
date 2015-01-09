@@ -5,25 +5,7 @@
 # Copyright (c) 2014 The Authors, All Rights Reserved.
 
 chef_gem 'inifile'
-
 require 'inifile'
-
-# install the software we need
-# %w(
-# autoconf
-# automake
-# libtool
-# flex
-# bison
-# gperf
-# gawk
-# m4
-# make
-# OpenSSL
-# libssl-dev
-# git
-# s3cmd
-# ).each { | pkg | package pkg }
 
 if File.exists?(File.expand_path node['virtuoso']['config'])
   # Open and read the virtuoso file
@@ -53,17 +35,19 @@ service "virtuoso" do
   action [ :enable, :start ]
 end
 
-bash "setup_virtuoso" do
-  # code "#{node['virtuoso']['bin']}virtuoso-t -c #{node['virtuoso']['config']} "
-  # code "sleep 20"
+node['datasets'].each { | dataset |
+  bash "add_#{dataset}" do
+    code <<-EOH
+      echo "### Loading #{dataset} into virtuoso..."
+      #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="ld_dir('#{dataset}', '*.ttl', '#{dataset}');"
+    EOH
+  end
+}
 
-  node['datasets'].each { | dataset |
-    puts "### Loading #{dataset} into virtuoso..."
-    code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"ld_dir('#{dataset}', '*.ttl', '#{dataset}');\""
-  }
-
-  code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"rdf_loader_run();\""
-
-  puts "### Creating checkpoint for server #{$port}..."
-  code "#{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec=\"checkpoint;\""
+bash "ingest_virtuoso" do
+  code <<-EOH
+    echo "### Ingesting data"
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();"
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="checkpoint;"
+  EOH
 end

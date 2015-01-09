@@ -6,7 +6,7 @@ require 'json'
 # Parse the json configuration
 $settings = {}
 
-if File.exists?(File.expand_path ENV['CONFIG_FILE'])
+if !(ENV['CONFIG_FILE'].nil?) && File.exists?(File.expand_path ENV['CONFIG_FILE'])
   $settings = JSON.parse(File.read(File.expand_path ENV['CONFIG_FILE']))
 else
   if File.exists?(File.expand_path "./config-default.json")
