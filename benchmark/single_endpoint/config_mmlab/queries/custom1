@@ -259,6 +259,15 @@ WHERE
   FILTER(?real_id IN(<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454>,<http://ns.ontoforce.com/datasets/drugbank/DB00241>))
 }
 ORDER BY ?group_rank ?property_rank
+# Get the number of drugs per development phase having "migraine"
+# in their description, for manufacturer "Sandoz inc".
+# Phases come from chembl, manufacturers come from drugbank.
+#
+# Time: ~0.4s
+# Expected result:
+#   "val","vc"
+#   4,11
+#   0,1
 
 SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
 WHERE
@@ -275,8 +284,7 @@ WHERE
       ?original_2 ?facet_source_2 ?facet_value_2.
       FILTER(?facet_source_2 = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
       FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/dailymed/Drug>, <http://ns.ontoforce.com/ontologies/unii/Substance>, <http://ns.ontoforce.com/ontologies/pubmed/Chemical>, <http://ns.ontoforce.com/ontologies/hsdb/Compound>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMoleculeTarget>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/integration_ontology#DrugIntervention>, <http://rdf.ebi.ac.uk/terms/chembl#Synthetic>, <http://rdf.ebi.ac.uk/terms/chembl#NaturalProductDerived>, <http://rdf.ebi.ac.uk/terms/chembl#Inorganic>))
-      ?original_3 ?propertysearch_1 ?property_valuesearch_1.
-      FILTER (<bif:contains>(?property_valuesearch_1, '"migraine"')).
+      ?original_3 <materialization:containsText> "migraine".
       ?original_1 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
       ?original_2 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
       ?original_3 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?id.
@@ -293,8 +301,7 @@ WHERE
       ?original ?facet_source_4 ?facet_value_4.
       FILTER(?facet_source_4 = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
       FILTER (?facet_value_4 IN (<http://ns.ontoforce.com/ontologies/dailymed/Drug>, <http://ns.ontoforce.com/ontologies/unii/Substance>, <http://ns.ontoforce.com/ontologies/pubmed/Chemical>, <http://ns.ontoforce.com/ontologies/hsdb/Compound>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMoleculeTarget>, <http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/integration_ontology#DrugIntervention>, <http://rdf.ebi.ac.uk/terms/chembl#Synthetic>, <http://rdf.ebi.ac.uk/terms/chembl#NaturalProductDerived>, <http://rdf.ebi.ac.uk/terms/chembl#Inorganic>))
-      ?original ?propertysearch_2 ?property_valuesearch_2.
-     FILTER (<bif:contains>(?property_valuesearch_2, '"migraine"')).
+      ?original <materialization:containsText> "migraine".
       OPTIONAL
       {
         ?original <http://ns.ontoforce.com/2013/disqover#preferredUri> ?identifier.
@@ -307,11 +314,19 @@ WHERE
 GROUP BY ?val
 ORDER BY DESC(?vc)
 LIMIT 15
+# Count the number of distinct drugs that have "migraine" in their description,
+# for certain manufacturers, from drugbank.
+# Instances with different uris that should be considered the same, are counted twice.
+#
+# Time: ~0.3s
+# Expected result:
+#   "total_count"
+#   11
 
-SELECT (COUNT(DISTINCT ?id) as ?total_count)
+SELECT (COUNT(DISTINCT ?pref) as ?total_count)
 WHERE
 {
-  SELECT DISTINCT ?id
+  SELECT DISTINCT ?pref
   WHERE
   {
     {
@@ -326,8 +341,8 @@ WHERE
     }
     ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
     FILTER (?facet_value_2 IN (<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>))
-    ?id ?property1 ?property_value1.
-   FILTER (<bif:contains>(?property_value1, '"migraine"')).
+    ?id <materialization:containsText> "migraine".
+    BIND(?id AS ?pref)
   }
   LIMIT 1000
 }
@@ -336,13 +351,21 @@ SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
 WHERE
 {
   ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> ?val.
-  ?id ?property1 ?property_value1.
-  FILTER (<bif:contains>(?property_value1, '"migraine"')).
+  ?id <materialization:containsText> "migraine".
   ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ontoforce.com/ontologies/drugbank/Drug>.
 }
 GROUP BY ?val
 ORDER BY DESC(?vc)
 LIMIT 15
+# Get the top ATC (level 1) codes for drugs having "migraine" in their description,
+# for certain manufacturers, from drugbank.
+#
+# Time: ~0.3s
+# Expected result:
+#   "val","vc"
+#   "http://ns.ontoforce.com/datasets/atc/N",7
+#   "http://ns.ontoforce.com/datasets/atc/C",5
+#   "http://ns.ontoforce.com/datasets/atc/S",2
 
 SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
 WHERE
@@ -355,27 +378,26 @@ WHERE
   {
     ?id <http://ns.ontoforce.com/ontologies/drugbank/manufacturer> "Sandoz inc"^^<http://www.w3.org/2001/XMLSchema#string>.
   }
-  ?id ?property1 ?property_value1.
-  FILTER (<bif:contains>(?property_value1, '"migraine"'))
+  ?id <materialization:containsText> "migraine".
   ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ontoforce.com/ontologies/drugbank/Drug>.
 }
 GROUP BY ?val
 ORDER BY DESC(?vc)
 LIMIT 15
 
-SELECT (COUNT(DISTINCT ?id) as ?total_count)
+SELECT (COUNT(DISTINCT ?pref) as ?total_count)
 WHERE
 {
-  SELECT DISTINCT ?id
+  SELECT DISTINCT ?pref
   WHERE
   {
     {
       ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?v
     }
     ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_1.
-    FILTER (?facet_value_1 IN (<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>)).
-    ?id ?property1 ?property_value1 .
-    FILTER (<bif:contains>(?property_value1, '"migraine"'))
+    FILTER (?facet_value_1 IN (<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>, <http://ns.ontoforce.com/ontologies/drugbank/Drug>))
+    ?id <materialization:containsText> "migraine".
+    BIND(?id AS ?pref)
   }
   LIMIT 1000
 }
