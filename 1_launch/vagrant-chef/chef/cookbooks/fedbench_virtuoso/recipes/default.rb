@@ -47,7 +47,15 @@ node['datasets'].each { | dataset |
 bash "ingest_virtuoso" do
   code <<-EOH
     echo "### Ingesting data"
-    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();"
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
+    wait
     #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="checkpoint;"
   EOH
 end
