@@ -25,7 +25,7 @@
 #	query sets can be combinated using comma as separator
 #	default: ALL
 #
-querySet = ALL
+querySet = SIMPLE,CROSSDOMAIN,LINKED-DATA
 
 ###
 # dataConfig
