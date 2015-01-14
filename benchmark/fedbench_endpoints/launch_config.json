@@ -1,0 +1,53 @@
+{
+  "subnet": "subnet-9bc563c2",
+  "security_groups": ["sg-274ab743"],
+  "ami": "ami-900273f8",
+  "ami_benchmarker": "ami-62e18d0a",
+  "virtuoso": {
+    "user": "dba",
+    "pass": "dba",
+    "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
+    "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
+  },
+  "endpoints": [{
+    "name": "chebi",
+    "ip": "10.0.0.10",
+    "datasets": ["/data/chebi/"]
+  }, {
+    "name": "dbpedia",
+    "ip": "10.0.0.11",
+    "datasets": ["dbpedia"]
+  }, {
+    "name": "drugbank",
+    "ip": "10.0.0.12",
+    "datasets": ["drugbank"]
+  }, {
+    "name": "geonames",
+    "ip": "10.0.0.13",
+    "datasets": ["geonames"]
+  }, {
+    "name": "jamendo",
+    "ip": "10.0.0.14",
+    "datasets": ["jamendo"]
+  }, {
+    "name": "kegg",
+    "ip": "10.0.0.15",
+    "datasets": ["kegg"]
+  }, {
+    "name": "linkedmdb",
+    "ip": "10.0.0.16",
+    "datasets": ["linkedmdb"]
+  }, {
+    "name": "nytimes",
+    "ip": "10.0.0.17",
+    "datasets": ["nytimes"]
+  }, {
+    "name": "sp2b",
+    "ip": "10.0.0.18",
+    "datasets": ["sp2b"]
+  }, {
+    "name": "swdf",
+    "ip": "10.0.0.19",
+    "datasets": ["swdf"]
+  }]
+}
