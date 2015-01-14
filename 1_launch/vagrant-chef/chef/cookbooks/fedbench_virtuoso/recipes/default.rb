@@ -39,7 +39,7 @@ node['datasets'].each { | dataset |
   bash "add_#{dataset}" do
     code <<-EOH
       echo "### Loading #{dataset} into virtuoso..."
-      #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="ld_dir('#{dataset}', '*.ttl', '#{dataset}');"
+      #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="ld_dir('#{dataset}', '*.ttl', 'file://#{dataset}');"
     EOH
   end
 }
