@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Update all packages.
+sudo apt-get -y update
 sudo apt-get install -y python-software-properties
-sudo apt-get install -y nginx curl wget unzip build-essential s3cmd automake flex bison gawk gperf libtool libssl-dev
+sudo apt-get install -y nginx curl wget unzip build-essential s3cmd automake flex bison gawk gperf libtool libssl-dev default-jre
 sudo apt-get -y upgrade
 
 export LANGUAGE=en_US.UTF-8
