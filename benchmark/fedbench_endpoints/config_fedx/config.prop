@@ -10,13 +10,13 @@
 #   location that is specified relatively
 #
 #   default: the current directory (=execution dir)
-#    
+#
 #baseDir = D:\\Programming\\workspace\\fluidops\\EvalBenchmark\\
 
 
 ###
 # querySet
-#   the querySet for this evaluation, i.e. 
+#   the querySet for this evaluation, i.e.
 #   ALL -> all datasets
 #   SIMPLE -> queries/simple
 #   CUSTOM1 -> queries/custom
@@ -30,11 +30,10 @@ querySet = CUSTOM1
 ###
 # dataConfig
 #   the data configuration file, location rel. to baseDir
-#   
+#
 #   see doc/sampleConfig for some configuration possibilities
 #
-#dataConfig = config\\demoFederatedSparql.ttl
-dataConfig = config/demoFederatedSparql2.ttl
+dataConfig = ./config/demoFederatedSparql.ttl
 
 
 
@@ -93,7 +92,7 @@ timeout = 0
 #	  - RdfReportStream -> generates RDF triples in N3 syntax
 #	  - CsvRdfReportStream -> RDF + CSV2 report
 #	  - CsvReportStream2 -> print result into more intuitive csv file
-#     
+#
 #   Default values:
 #     - in debug mode: SimplePrintStream
 #     - otherwise: CsvRdfReportStream
@@ -125,7 +124,7 @@ evaluationClass = org.semanticweb.fbench.evaluation.FedXSparqlEvaluation
 # earlyResultsMonitorClass
 #	the fully qualified class name of the EarlyResultsMonitor to be used.
 #
-# 	EarlyResultsMonitor is an interface that can be used to measure the 
+# 	EarlyResultsMonitor is an interface that can be used to measure the
 #	performance of early results.
 #
 #	Default: org.semanticweb.fbench.report.NoOpEarlyResultsMonitor
@@ -139,11 +138,11 @@ evaluationClass = org.semanticweb.fbench.evaluation.FedXSparqlEvaluation
 #	some further information
 #
 #	This feature is tested with the provided Jetty Proxy, which acts transparently
-#	and forwards requests according to the following scheme. 
+#	and forwards requests according to the following scheme.
 #
 # 	http://localhost:2000/http://myEndpoint.com:80/sparql
 #
-# 	In the above example the request is forwarded to 
+# 	In the above example the request is forwarded to
 #	http://myEndpoint.com:80/sparql. Note that in the general case
 #   this URL is urlEncoded.
 #
@@ -157,8 +156,8 @@ evaluationClass = org.semanticweb.fbench.evaluation.FedXSparqlEvaluation
 # 	workbench when the result is published.
 #
 #	Example description: Endpoint Federation (Sesame) Cross Domain Queries
-#  
-# 
+#
+#
 description = Benchmark using FedX Framework
 
 
@@ -168,7 +167,7 @@ description = Benchmark using FedX Framework
 #    shall be reported per query (see SparqlQueryRequestReport). Note that this
 #	 report works only for local SPARQL endpoints (SparqlServlet2) and the evaluation
 #	 class SesameSparqlEvaluation
-#  	
+#
 #	 true: report stats to result\sparql_stats.csv
 #  	 false: disabled
 #
@@ -178,9 +177,9 @@ description = Benchmark using FedX Framework
 
 ###
 # sparqlRequestDelay
-#   the delay in ms, which is added to each sparql request. Note that this configuration (if enabled) 
-#   works only with local SPARQL server, since the property is added in SPARQLServlet2, i.e. it is 
-# 	given as argument to the automatically started servers. 
-# 	
+#   the delay in ms, which is added to each sparql request. Note that this configuration (if enabled)
+#   works only with local SPARQL server, since the property is added in SPARQLServlet2, i.e. it is
+# 	given as argument to the automatically started servers.
+#
 #	Default is -1 (disabled)
 #sparqlRequestDelay=-1

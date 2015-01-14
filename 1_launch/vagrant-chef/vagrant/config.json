@@ -1,8 +1,8 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-900273f8",
-  "ami_benchmarker": "ami-62e18d0a",
+  "ami": "ami-50225f38",
+  "ami_benchmarker": "ami-ec493f84",
   "virtuoso": {
     "user": "dba",
     "pass": "dba",
