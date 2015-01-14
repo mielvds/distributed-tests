@@ -259,15 +259,6 @@ WHERE
   FILTER(?real_id IN(<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454>,<http://ns.ontoforce.com/datasets/drugbank/DB00241>))
 }
 ORDER BY ?group_rank ?property_rank
-# Get the number of drugs per development phase having "migraine"
-# in their description, for manufacturer "Sandoz inc".
-# Phases come from chembl, manufacturers come from drugbank.
-#
-# Time: ~0.4s
-# Expected result:
-#   "val","vc"
-#   4,11
-#   0,1
 
 SELECT ?val (COUNT(DISTINCT ?id) as ?vc)
 WHERE
