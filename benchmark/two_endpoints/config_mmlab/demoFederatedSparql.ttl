@@ -4,7 +4,7 @@ WHERE
 	?resource <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t .
             {
                {
-                 { SERVICE <http://10.0.0.10:8891/sparql>
+                 { SERVICE <http://10.0.0.13:8891/sparql>
 			{
 				?remoteresource <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	?t .
 			}
