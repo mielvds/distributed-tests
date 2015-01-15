@@ -11,7 +11,7 @@ cd FedBench\ 3.0
 chmod +x ./runEval.sh
 
 # FedX
-cp -af ~/configuration_scripts_benchmarks/benchmark/single_endpoint/config_fedx/* ./config/
+cp -af ~/configuration_scripts_benchmarks/benchmark/two_endpoints/config_fedx/* ./config/
 ./runEval.sh
 
 # DO SMTH WITH OUTPUT
@@ -20,7 +20,7 @@ rm -R ./result
 mkdir ./result
 
 # MMLab Distributed SPARQL
-cp -af ~/configuration_scripts_benchmarks/benchmark/single_endpoint/config_mmlab/* ./config/
+cp -af ~/configuration_scripts_benchmarks/benchmark/two_endpoints/config_mmlab/* ./config/
 ./runEval.sh
 
 # DO SMTH WITH OUTPUT
@@ -29,7 +29,7 @@ rm -R ./result
 mkdir ./result
 
 # Sesame
-cp -af ~/configuration_scripts_benchmarks/benchmark/single_endpoint/config_sesame/* ./config/
+cp -af ~/configuration_scripts_benchmarks/benchmark/two_endpoints/config_sesame/* ./config/
 ./runEval.sh/
 
 # DO SMTH WITH OUTPUT
