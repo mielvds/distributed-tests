@@ -6,14 +6,6 @@ mkdir ~/output
 mkdir ~/output/fedx
 mkdir ~/output/sesame
 mkdir ~/output/mmlab
-mkdir ~/output/direct
-
-cd
-
-cd ~/configuration/configuration_scripts_benchmarks/benchmark/single_endpoint/config_direct/sparql-query-bm-2.0.1/
-rm result.csv
-./benchmark -q http://10.0.0.10:8891/sparql -m mix.txt -r 5 -w 2 -c result.csv
-cp ./result.csv /home/ubuntu/output/direct
 
 cd FedBench\ 3.0
 chmod +x ./runEval.sh
