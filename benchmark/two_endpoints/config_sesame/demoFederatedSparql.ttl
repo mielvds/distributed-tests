@@ -1,4 +1,10 @@
 @prefix fluid: <http://fluidops.org/config#>.
 
-<http://Ontoforce> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "http://singleinstance:8891/sparql".
+<http://chembl> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://10.0.0.10:8891/sparql".
+
+<http://drugbank> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://10.0.0.11:8891/sparql".
+
+<http://interlinks> fluid:store "SPARQLEndpoint";
+fluid:SPARQLEndpoint "http://10.0.0.12:8891/sparql".

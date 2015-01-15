@@ -50,179 +50,57 @@ WHERE
   LIMIT 1000
 }
 
-PREFIX disq: <http://ns.ontoforce.com/2013/disqover#>
-SELECT (?pref as ?identifier)
+SELECT (COUNT(DISTINCT ?id) as ?total_count)
 WHERE
 {
+  SELECT DISTINCT ?id
+  WHERE
   {
-    SELECT ?id ?pref
-    WHERE
     {
-      ?id <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-      ?id1 <http://ns.ontoforce.com/ontologies/drugbank/action> "agonist"^^<http://www.w3.org/2001/XMLSchema#string>.
-      ?id2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
-      FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/drugbank/DrugTransporterRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugTargetRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugEnzymeRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugCarrierRelation>, <http://rdf.ebi.ac.uk/terms/chembl#Activity>))
-      {
-        SELECT ?class ?id3 ?p
-        WHERE
-        {
-          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref
-          {
-            ?s ?p ?id3
-          }
-          UNION
-          {
-            ?id3 ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id3 a ?class.
-        }
-      }
-      UNION
-      {
-        SELECT ?class ?id3 ?p
-        WHERE
-        {
-          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732>)
-          {
-            ?s ?p ?id3
-          }
-          UNION
-          {
-            ?id3 ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id3 a ?class.
-        }
-      }
-      UNION
-      {
-        SELECT ?class ?id4 ?p
-        WHERE
-        {
-          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref
-          {
-            ?s ?p ?id4
-          }
-          UNION
-          {
-            ?id4 ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id4 a ?class.
-        }
-      }
-      UNION
-      {
-        SELECT ?class ?id4 ?p
-        WHERE
-        {
-          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905>)
-          {
-            ?s ?p ?id4
-          }
-          UNION
-          {
-            ?id4 ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id4 a ?class.
-        }
-      }
-      ?id1 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-      ?id2 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-      ?id3 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
-      ?id4 <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+      ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?v
     }
-  }
-  UNION
-  {
-    SELECT ?id (?id as ?pref)
-    WHERE
+    ?id ?facet_source_1 ?facet_value_1.
+    FILTER(?facet_source_1 = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
+    FILTER (?facet_value_1 IN (<http://ns.ontoforce.com/ontologies/drugbank/DrugDrugInteraction>))
     {
-      ?id <http://ns.ontoforce.com/ontologies/drugbank/action> "agonist"^^<http://www.w3.org/2001/XMLSchema#string>.
-      ?id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?facet_value_2.
-      FILTER (?facet_value_2 IN (<http://ns.ontoforce.com/ontologies/drugbank/DrugTransporterRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugTargetRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugEnzymeRelation>, <http://ns.ontoforce.com/ontologies/drugbank/DrugCarrierRelation>, <http://rdf.ebi.ac.uk/terms/chembl#Activity>))
+      SELECT ?class ?id ?p
+      WHERE
       {
-        SELECT ?class ?id ?p
-        WHERE
+        FILTER(?id_linked IN (<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454>,<http://ns.ontoforce.com/datasets/drugbank/DB01356>))
+        ?id_linked <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref.
+        ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?pref
         {
-          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred.
-          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred
-          {
-            ?s ?p ?id
-          }
-          UNION
-          {
-            ?id ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id a ?class.
+          ?s ?p ?id
         }
-      }
-      UNION
-      {
-        SELECT ?class ?id ?p
-        WHERE
+        UNION
         {
-          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL1732>)
-          {
-            ?s ?p ?id
-          }
-          UNION
-          {
-            ?id ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id a ?class.
+          ?id ?p ?s
         }
+        FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+        ?id a ?class.
       }
-      UNION
-      {
-        SELECT ?class ?id ?p
-        WHERE
-        {
-          <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905> <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred .
-          ?s <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred
-          {
-            ?s ?p ?id
-          }
-          UNION
-          {
-            ?id ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))). ?id a ?class.
-        }
-      }
-      UNION
-      {
-        SELECT ?class ?id ?p
-        WHERE
-        {
-          FILTER(?s = <http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL905>)
-          {
-            ?s ?p ?id
-          }
-          UNION
-          {
-            ?id ?p ?s
-          }
-          FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
-          ?id a ?class.
-        }
-      }
-      OPTIONAL
-      {
-        ?id <http://ns.ontoforce.com/2013/disqover#preferredUri> ?preferred.
-      }
-      FILTER(!BOUND(?preferred))
     }
+    UNION
+    {
+      SELECT ?class ?id ?p
+      WHERE
+      {
+        FILTER(?id_linked IN (<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454>,<http://ns.ontoforce.com/datasets/drugbank/DB01356>))
+        {
+          ?id_linked ?p ?id
+        }
+        UNION
+        {
+          ?id ?p ?id_linked
+        }
+        FILTER(!(?p IN (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://ns.ontoforce.com/2013/disqover#preferredUri>))).
+        ?id a ?class.
+      }
+    }
+    FILTER(?v IN(<http://rdf.ebi.ac.uk/terms/chembl#Assay>,<http://ns.ontoforce.com/ontologies/clinicaltrials/ClinicalTrial>,<http://www.orpha.net/ORDO/Orphanet_C001>,<http://ns.ontoforce.com/ontologies/icd9-cm/DiseaseOrInjury>,<http://ns.ontoforce.com/ontologies/icd10-cm/DiseaseOrInjury>,<http://ns.ontoforce.com/ontologies/dailymed/Drug>,<http://ns.ontoforce.com/ontologies/unii/Substance>,<http://ns.ontoforce.com/ontologies/pubmed/Chemical>,<http://ns.ontoforce.com/ontologies/hsdb/Compound>,<http://ns.ontoforce.com/ontologies/drugbank/Drug>,<http://rdf.ebi.ac.uk/terms/chembl#SmallMoleculeTarget>,<http://rdf.ebi.ac.uk/terms/chembl#SmallMolecule>,<http://ns.ontoforce.com/ontologies/integration_ontology#DrugIntervention>,<http://rdf.ebi.ac.uk/terms/chembl#Synthetic>,<http://rdf.ebi.ac.uk/terms/chembl#NaturalProductDerived>,<http://rdf.ebi.ac.uk/terms/chembl#Inorganic>,<http://rdf.ebi.ac.uk/terms/chembl#Enzyme>,<http://www.orpha.net/ORDO/Orphanet_C010>,<http://ns.ontoforce.com/ontologies/hgnc/Gene>,<http://ns.ontoforce.com/ontologies/gene/Gene>,<http://ns.ontoforce.com/ontologies/homologene/HomologeneGroup>,<http://ns.ontoforce.com/ontologies/generif/GeneGeneInteraction>,<http://ns.ontoforce.com/ontologies/drugbank/DrugDrugInteraction>,<http://ns.ontoforce.com/ontologies/pubmed/Journal>,<http://rdf.ebi.ac.uk/terms/chembl#Journal>,<http://ns.ontoforce.com/ontologies/taxonomy/Organism>,<http://rdf.ebi.ac.uk/terms/chembl#Organism>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Sponsor>,<http://ns.ontoforce.com/ontologies/clinicaltrials/ResponsibleParty>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Facility>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Authority>,<http://ns.ontoforce.com/ontologies/drugbank/Patent>,<http://rdf.ebi.ac.uk/terms/chembl#IbmPatentStructureRef>,<http://rdf.ebi.ac.uk/terms/chembl#IbmPatentRef>,<http://www.biopax.org/release/biopax-level3.owl#Pathway>,<http://ns.ontoforce.com/ontologies/wikipathways/Pathway>,<http://ns.ontoforce.com/ontologies/uniprot/Protein>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinTarget>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinMolecule>,<http://rdf.ebi.ac.uk/terms/chembl#SingleProtein>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinSelectivityGroup>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinProteinInteraction>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinFamily>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinComplexGroup>,<http://rdf.ebi.ac.uk/terms/chembl#ProteinComplex>,<http://rdf.ebi.ac.uk/terms/chembl#ChimericProtein>,<http://ns.ontoforce.com/ontologies/pubmed/PubmedRecord>,<http://ns.ontoforce.com/ontologies/pubmed/Abstract>,<http://rdf.ebi.ac.uk/terms/chembl#Document>,<http://ns.ontoforce.com/ontologies/drugbank/DrugTransporterRelation>,<http://ns.ontoforce.com/ontologies/drugbank/DrugTargetRelation>,<http://ns.ontoforce.com/ontologies/drugbank/DrugEnzymeRelation>,<http://ns.ontoforce.com/ontologies/drugbank/DrugCarrierRelation>,<http://rdf.ebi.ac.uk/terms/chembl#Activity>,<http://ns.ontoforce.com/ontologies/integration_ontology#Researcher>,<http://www.orpha.net/ORDO/Orphanet_C023>,<http://www.orpha.net/ORDO/Orphanet_C012>,<http://www.orpha.net/ORDO/Orphanet_C005>,<http://www.geneontology.org/formats/oboInOwl#ObsoleteClass>,<http://ns.ontoforce.com/ontologies/mesh/MeshDescriptor>,<http://ns.ontoforce.com/ontologies/icd9-cm/tables/InfluencingFactor>,<http://ns.ontoforce.com/ontologies/icd9-cm/tables/ExternalCause>,<http://ns.ontoforce.com/ontologies/icd9-cm/ExternalCause>,<http://ns.ontoforce.com/ontologies/taxonomy/GeneticCode>,<http://ns.ontoforce.com/ontologies/taxonomy/Division>,<http://ns.ontoforce.com/ontologies/taxonomy/Citation>,<http://ns.ontoforce.com/ontologies/pubmed/Person>,<http://ns.ontoforce.com/ontologies/pubmed/MeshDescriptorQualifierPair>,<http://ns.ontoforce.com/ontologies/pubmed/Group>,<http://ns.ontoforce.com/ontologies/pubmed/Grant>,<http://ns.ontoforce.com/ontologies/homologene/HomologeneGroupElement>,<http://ns.ontoforce.com/ontologies/gene/ExternalReference>,<http://ns.ontoforce.com/ontologies/drugbank/ProteinSequence>,<http://ns.ontoforce.com/ontologies/drugbank/Price>,<http://ns.ontoforce.com/ontologies/drugbank/Partner>,<http://ns.ontoforce.com/ontologies/drugbank/Packager>,<http://ns.ontoforce.com/ontologies/drugbank/ExperimentalProperty>,<http://ns.ontoforce.com/ontologies/drugbank/Dosage>,<http://ns.ontoforce.com/ontologies/drugbank/CalculatedProperty>,<http://ns.ontoforce.com/ontologies/clinicaltrials/ReportingGroup>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Person>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Outcome>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Intervention>,<http://ns.ontoforce.com/ontologies/clinicaltrials/EventType>,<http://ns.ontoforce.com/ontologies/clinicaltrials/EventCategory>,<http://ns.ontoforce.com/ontologies/clinicaltrials/EligibilityCriterion>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Country>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Contact>,<http://ns.ontoforce.com/ontologies/clinicaltrials/Condition>,<http://ns.ontoforce.com/ontologies/clinicaltrials/ArmGroup>))
   }
+  LIMIT 1000
 }
-GROUP BY ?pref
-LIMIT 20
 
 PREFIX disq: <http://ns.ontoforce.com/2013/disqover#>
 SELECT ?graph (<http://rdf.ebi.ac.uk/resource/chembl/molecule/CHEMBL454> AS ?id) ?property ?property_value ?label ?lens ?property_rank ?group ?group_label ?renderer

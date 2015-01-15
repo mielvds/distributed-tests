@@ -57,5 +57,7 @@ bash "ingest_virtuoso" do
     #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="rdf_loader_run();" &
     wait
     #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="checkpoint;"
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="DB.DBA.RDF_OBJ_FT_RULE_ADD (null, null, 'All');"
+    #{node['virtuoso']['isql']} #{$port} #{node['virtuoso']['user']} #{node['virtuoso']['pass']} exec="checkpoint;"
   EOH
 end
