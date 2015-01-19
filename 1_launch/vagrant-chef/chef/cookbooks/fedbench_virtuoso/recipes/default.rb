@@ -35,7 +35,7 @@ service "virtuoso" do
   action [ :enable, :start ]
 end
 
-node['datasets'].each { | dataset |
+node['endpt']['datasets'].each { | dataset |
   bash "add_#{dataset}" do
     code <<-EOH
       echo "### Loading #{dataset} into virtuoso..."

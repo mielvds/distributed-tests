@@ -14,8 +14,6 @@ else
   end
 end
 
-$install_virtuoso = 'false'
-
 def provision_server (config, endpt)
   config.vm.define endpt['name'] do |instance|
     instance.vm.provider :aws do |aws, override|
@@ -27,13 +25,15 @@ def provision_server (config, endpt)
 
     instance.vm.provision "chef_solo" do |chef|
 		  chef.json = {
-			  :datasets => endpt['datasets'],
-			  :install_virtuoso => $install_virtuoso,
+        :hostname => $settings['hostname'],
+        :endpoints => $settings['endpoints'],
+			  :endpoint => endpt,
         :virtuoso => $settings['virtuoso']
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
       chef.add_recipe "fedbench_virtuoso"
+      chef.add_recipe "fedbench_ldf"
     end
   end
 end
