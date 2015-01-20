@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
 #   		aws.session_token = "SESSION TOKEN"
 		aws.keypair_name = ENV['SSH_KEYNAME']
 		aws.region = "us-east-1"
-		aws.block_device_mapping = [{ 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 160 }]
+		aws.block_device_mapping = [{ 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 160, 'Ebs.VolumeType' => 'gp2' }]
 		aws.ebs_optimized = "true"
 		aws.security_groups = $settings['security_groups']
 		aws.subnet_id = $settings['subnet']
@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
 #		The following image has already virtuoso installed.
 		aws.ami = $settings['ami']
 
-		aws.instance_type = "c3.2xlarge"
+		aws.instance_type = "m3.2xlarge"
 		override.ssh.username = "ubuntu"
 		override.ssh.private_key_path = ENV['SSH_KEY'] #should not be necessary as aws key is given
 	end
