@@ -1,5 +1,3 @@
-include_recipe 'nodejs::npm'
-
 bash 'set default locale to UTF-8' do
   code <<-EOH
   update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
@@ -8,12 +6,10 @@ bash 'set default locale to UTF-8' do
 end
 #
 # dont't prompt for host key verfication (if any)
-template '/home/vagrant/.ssh/config' do
-  user 'vagrant'
-  group 'vagrant'
-  mode '0600'
-  source 'config'
-end
+# template '/home/vagrant/.ssh/config' do
+#   mode '0600'
+#   source 'config'
+# end
 
 execute 'apt-get update'
 package 'python-software-properties'
@@ -23,42 +19,47 @@ package 'python-software-properties'
 curl
 vim
 git
-nodejs
 build-essential
 openssl
 libssl-dev
 ).each { | pkg | package pkg }
 
-template '/home/vagrant/.bash_aliases' do
-  user 'vagrant'
-  mode '0644'
-  source '.bash_aliases.erb'
-end
 
-template '/home/vagrant/.bash_profile' do
-  user 'vagrant'
-  group 'vagrant'
+template '/home/ubuntu/.bash_profile' do
   source '.bash_profile'
 end
 
+bash 'Install node and npm' do
+  code <<-EOH
+  curl -sL https://deb.nodesource.com/setup | sudo bash -
+  sudo apt-get install -y nodejs
+  EOH
+end
+
 #install the nodejs server
-git '/ldf-server' do
-  repository 'http://git.mmlab.be/linked-data-fragments/server.git'
+git '/home/ubuntu/ldf-server' do
+  repository 'https://github.com/mielvds/discovery.git'
   revision 'discovery'
   action :sync
-  user 'vagrant'
+end
+
+
+bash 'run npm' do
+  code <<-EOH
+  cd /home/ubuntu/ldf-server
+  npm install
+  EOH
 end
 
 # Create JSON configuration
-template '/ldf-server/config.json' do
+template '/home/ubuntu/ldf-server/config.json' do
   source 'config.json.erb'
   variables(
-  :endpoint => node['endpoint']
+    :endpoint => node['endpoint']
   )
-  user 'vagrant'
-  group 'vagrant'
   mode 0664
 end
+
 
 # Create /etc/hosts configuration
 template '/etc/hosts' do
@@ -66,16 +67,7 @@ template '/etc/hosts' do
   variables(
   :endpoints => node['endpoints']
   )
-  user 'vagrant'
-  group 'vagrant'
   mode 0664
-end
-
-# Run npm install for server
-nodejs_npm 'ldf-server' do
-  path '/ldf-server'
-  json 'package.json'
-  user 'vagrant'
 end
 
 # Get perfmon
@@ -84,10 +76,13 @@ remote_file '/perfmon-2.1b1.tgz' do
   action :create_if_missing
 end
 
+# Create upstart
+template '/etc/init/ldfserver.conf' do
+  source 'ldfserver.conf.erb'
+  mode 0664
+end
 
-bash "start_server" do
-  code <<-EOH
-  /ldf-server/bin/ldf-server /ldf-server/config.json 80 1 2> log.txt
-  EOH
-  user 'vagrant'
+ service "ldfserver" do
+  supports [ :stop, :start, :restart ]
+ action [ :enable, :start ]
 end
