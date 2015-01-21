@@ -24,7 +24,7 @@ openssl
 libssl-dev
 ).each { | pkg | package pkg }
 
-template '/home/ubuntu/.bash_profile' do
+cookbook_file '/home/ubuntu/.bash_profile' do
   source '.bash_profile'
 end
 
@@ -35,6 +35,7 @@ bash 'Install node and npm' do
   npm install -g node-gyp # Install the "node-gyp" globally.
   cd ~
   npm update # Update your personal npm local repository again.
+  npm -g install forever
   EOH
 end
 
@@ -54,7 +55,6 @@ template '/home/ubuntu/ldf-server/config.json' do
   mode 0664
 end
 
-
 # Create /etc/hosts configuration
 template '/etc/hosts' do
   source 'hosts.erb'
@@ -62,6 +62,38 @@ template '/etc/hosts' do
     :local => node['endpoint']['name'],
     :endpoints => node['endpoints']
   )
+  mode 0664
+end
+
+# Create nginx configuration
+cookbook_file '/etc/nginx/mime.types' do
+  source 'mime.types'
+  mode 0664
+end
+
+cookbook_file '/etc/nginx/nginx.conf' do
+  source 'nginx.conf'
+  mode 0664
+end
+
+cookbook_file '/etc/rc.local' do
+  source 'startup.sh'
+  mode 0664
+end
+
+bash 'run startup' do
+  code <<-EOH
+  test -d /mnt/tmp             || mkdir -m 1777 /mnt/tmp
+  test -d /mnt/tmp/nginx       || mkdir -m 1777 -p /mnt/tmp/nginx
+  test -d /mnt/tmp/cache/nginx || mkdir -m 1777 -p /mnt/tmp/cache/nginx
+  test -d /mnt/log/nginx       || mkdir -m 1777 -p /mnt/log/nginx
+  EOH
+end
+
+file '/etc/nginx/sites-enabled/default'
+
+cookbook_file "/etc/nginx/sites-enabled/default.conf" do
+  source 'nginx-site.conf'
   mode 0664
 end
 
@@ -77,16 +109,10 @@ bash 'run npm' do
   cd /home/ubuntu/ldf-server
   mkdir summaries
   sudo npm install
+  sudo forever start -o out.log  -e err.log  ./bin/ldf-server ./config.json 4000 1
   EOH
 end
 
-# Create upstart
-template '/etc/init/ldfserver.conf' do
-  source 'ldfserver.conf.erb'
-  mode 0664
-end
-
-service "ldfserver" do
-  supports [ :stop, :start ]
-  action [ :enable, :start ]
+service 'nginx' do
+  action [ :restart ]
 end
