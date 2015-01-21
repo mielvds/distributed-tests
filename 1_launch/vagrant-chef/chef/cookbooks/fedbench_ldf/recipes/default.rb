@@ -24,7 +24,6 @@ openssl
 libssl-dev
 ).each { | pkg | package pkg }
 
-
 template '/home/ubuntu/.bash_profile' do
   source '.bash_profile'
 end
@@ -33,22 +32,17 @@ bash 'Install node and npm' do
   code <<-EOH
   curl -sL https://deb.nodesource.com/setup | sudo bash -
   sudo apt-get install -y nodejs
+  npm install -g node-gyp # Install the "node-gyp" globally.
+  cd ~
+  npm update # Update your personal npm local repository again.
   EOH
 end
 
-#install the nodejs server
+# install the nodejs server
 git '/home/ubuntu/ldf-server' do
-  repository 'https://github.com/mielvds/discovery.git'
+  repository 'http://git.mmlab.be/mvdrsand/discoveryserver.git'
   revision 'discovery'
   action :sync
-end
-
-
-bash 'run npm' do
-  code <<-EOH
-  cd /home/ubuntu/ldf-server
-  npm install
-  EOH
 end
 
 # Create JSON configuration
@@ -65,7 +59,8 @@ end
 template '/etc/hosts' do
   source 'hosts.erb'
   variables(
-  :endpoints => node['endpoints']
+    :local => node['endpoint']['name'],
+    :endpoints => node['endpoints']
   )
   mode 0664
 end
@@ -76,13 +71,22 @@ remote_file '/perfmon-2.1b1.tgz' do
   action :create_if_missing
 end
 
+# install NPM dependencies
+bash 'run npm' do
+  code <<-EOH
+  cd /home/ubuntu/ldf-server
+  mkdir summaries
+  sudo npm install
+  EOH
+end
+
 # Create upstart
 template '/etc/init/ldfserver.conf' do
   source 'ldfserver.conf.erb'
   mode 0664
 end
 
- service "ldfserver" do
-  supports [ :stop, :start, :restart ]
- action [ :enable, :start ]
+service "ldfserver" do
+  supports [ :stop, :start ]
+  action [ :enable, :start ]
 end

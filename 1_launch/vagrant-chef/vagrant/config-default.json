@@ -1,7 +1,7 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-900273f8",
+  "ami": "ami-a8e891c0",
   "ami_benchmarker": "ami-ec493f84",
   "virtuoso": {
     "user": "dba",
@@ -13,6 +13,7 @@
     "name": "drugbank",
     "ip": "10.0.0.21",
     "hostname" : "www4.wiwiss.fu-berlin.de",
+    "dereference" : "/drugbank/",
     "datasets": ["/data/drugbank/"]
   }]
 }

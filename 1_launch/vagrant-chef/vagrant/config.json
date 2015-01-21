@@ -13,51 +13,61 @@
     "name": "chebi",
     "ip": "10.0.0.10",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/chebi/"]
   }, {
     "name": "dbpedia",
     "ip": "10.0.0.11",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/dbpedia/"]
   }, {
     "name": "drugbank",
     "ip": "10.0.0.12",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/drugbank/"]
   }, {
     "name": "geonames",
     "ip": "10.0.0.13",
     "hostname" : "geonames.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/geonames/"]
   }, {
     "name": "jamendo",
     "ip": "10.0.0.14",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/jamendo/"]
   }, {
     "name": "kegg",
     "ip": "10.0.0.15",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/kegg/"]
   }, {
     "name": "linkedmdb",
     "ip": "10.0.0.16",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/linkedmdb/"]
   }, {
     "name": "nytimes",
     "ip": "10.0.0.17",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/nytimes/"]
   }, {
     "name": "sp2b",
     "ip": "10.0.0.18",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/sp2b/"]
   }, {
     "name": "swdf",
     "ip": "10.0.0.19",
     "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/swdf/"]
   }]
 }
