@@ -15,5 +15,12 @@
     "hostname" : "www4.wiwiss.fu-berlin.de",
     "dereference" : "/drugbank/",
     "datasets": ["/data/drugbank/"]
-  }]
+  },
+  {
+    "name": "kegg",
+    "ip": "10.0.0.15",
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "datasets": ["/data/kegg/"]
+    }]
 }

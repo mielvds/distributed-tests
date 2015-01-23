@@ -1,7 +1,7 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-92007efa",
+  "ami": "ami-a8e891c0",
   "ami_benchmarker": "ami-ec493f84",
   "virtuoso": {
     "user": "dba",
@@ -30,8 +30,8 @@
   }, {
     "name": "geonames",
     "ip": "10.0.0.13",
-    "hostname" : "geonames.org",
-    "dereference" : "/resource/",
+    "hostname" : "sws.geonames.org",
+    "dereference" : "/",
     "datasets": ["/data/geonames/"]
   }, {
     "name": "jamendo",

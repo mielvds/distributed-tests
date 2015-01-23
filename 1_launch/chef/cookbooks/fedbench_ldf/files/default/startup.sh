@@ -16,8 +16,8 @@ test -d /mnt/tmp/cache/nginx || mkdir -m 1777 -p /mnt/tmp/cache/nginx
 test -d /mnt/log/nginx       || mkdir -m 1777 -p /mnt/log/nginx
 
 # Copy HDT files to temporary disk for fast access
-test -d /mnt/data             || mkdir -m 1777 /mnt/data
-cp /data/* /mnt/data/
+#test -d /mnt/data             || mkdir -m 1777 /mnt/data
+#cp /data/* /mnt/data/
 
 cd /home/ubuntu/ldf-server
 sudo forever start -o out.log  -e err.log  ./bin/ldf-server ./config.json 4000 1

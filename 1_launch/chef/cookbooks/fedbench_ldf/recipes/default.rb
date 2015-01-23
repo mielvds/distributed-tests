@@ -90,7 +90,9 @@ bash 'run startup' do
   EOH
 end
 
-file '/etc/nginx/sites-enabled/default'
+link '/etc/nginx/sites-enabled/default' do
+  action :delete
+end
 
 cookbook_file "/etc/nginx/sites-enabled/default.conf" do
   source 'nginx-site.conf'
