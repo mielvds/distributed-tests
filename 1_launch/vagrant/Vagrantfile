@@ -32,8 +32,13 @@ def provision_server (config, endpt)
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
-      chef.add_recipe "fedbench_virtuoso"
-      chef.add_recipe "fedbench_ldf"
+      if $settings['virtuoso'].nil? || $settings['virtuoso']['enabled'].nil? || $settings['virtuoso']['enabled']
+        chef.add_recipe "fedbench_virtuoso"
+      end
+
+      if $settings['ldf'].nil? || $settings['ldf']['enabled'].nil? || $settings['virtuoso']['enabled']
+        chef.add_recipe "fedbench_ldf"
+      end
     end
   end
 end

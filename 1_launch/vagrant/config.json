@@ -3,7 +3,11 @@
   "security_groups": ["sg-274ab743"],
   "ami": "ami-a8e891c0",
   "ami_benchmarker": "ami-ec493f84",
+  "ldf": {
+    "enabled": true
+  },
   "virtuoso": {
+    "enabled": true,
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
