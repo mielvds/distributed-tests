@@ -1,53 +1,71 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-50225f38",
+  "ami": "ami-140f4b7c",
   "ami_benchmarker": "ami-ec493f84",
+  "ldf": {
+    "enabled": true
+  },
   "virtuoso": {
+    "enabled": true,
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
     "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
   },
   "endpoints": [{
-    "name": "chebi",
+    "name": "kegg-chebi",
     "ip": "10.0.0.10",
-    "datasets": ["/data/chebi/"]
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "datasets": ["/data/kegg-chebi/"]
   }, {
     "name": "dbpedia",
     "ip": "10.0.0.11",
+    "hostname" : "dbpedia.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/dbpedia/"]
   }, {
     "name": "drugbank",
     "ip": "10.0.0.12",
+    "hostname" : "www4.wiwiss.fu-berlin.de",
+    "dereference" : "/drugbank/",
     "datasets": ["/data/drugbank/"]
   }, {
     "name": "geonames",
     "ip": "10.0.0.13",
+    "hostname" : "sws.geonames.org",
+    "dereference" : "/",
     "datasets": ["/data/geonames/"]
   }, {
     "name": "jamendo",
     "ip": "10.0.0.14",
+    "hostname" : "dbtune.org",
+    "dereference" : "/jamendo/",
     "datasets": ["/data/jamendo/"]
   }, {
-    "name": "kegg",
-    "ip": "10.0.0.15",
-    "datasets": ["/data/kegg/"]
-  }, {
     "name": "linkedmdb",
-    "ip": "10.0.0.16",
+    "ip": "10.0.0.15",
+    "hostname" : "data.linkedmdb.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/linkedmdb/"]
   }, {
     "name": "nytimes",
-    "ip": "10.0.0.17",
+    "ip": "10.0.0.16",
+    "hostname" : "data.nytimes.com",
+    "dereference" : "/",
     "datasets": ["/data/nytimes/"]
   }, {
     "name": "sp2b",
-    "ip": "10.0.0.18",
+    "ip": "10.0.0.17",
+    "hostname" : "localhost",
+    "dereference" : "/resource/",
     "datasets": ["/data/sp2b/"]
   }, {
     "name": "swdf",
-    "ip": "10.0.0.19",
+    "ip": "10.0.0.18",
+    "hostname" : "data.semanticweb.org",
+    "dereference" : "/resource/",
     "datasets": ["/data/swdf/"]
   }]
 }

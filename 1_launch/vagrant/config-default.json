@@ -1,8 +1,13 @@
 {
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
-  "ami": "ami-900273f8",
+  "ami": "ami-140f4b7c",
+  "ami_benchmarker": "ami-ec493f84",
+  "ldf": {
+    "enabled": true
+  },
   "virtuoso": {
+    "enabled": true,
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
@@ -11,6 +16,15 @@
   "endpoints": [{
     "name": "drugbank",
     "ip": "10.0.0.21",
+    "hostname" : "www4.wiwiss.fu-berlin.de",
+    "dereference" : "/drugbank/",
     "datasets": ["/data/drugbank/"]
-  }]
+  },
+  {
+    "name": "kegg",
+    "ip": "10.0.0.15",
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "datasets": ["/data/kegg/"]
+    }]
 }

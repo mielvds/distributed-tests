@@ -12,7 +12,7 @@ if File.exists?(File.expand_path node['virtuoso']['config'])
   ini = IniFile::load(File.expand_path node['virtuoso']['config'])
 
   # Edit the contents
-  ini['Parameters']['DirsAllowed'] = "#{ini['Parameters']['DirsAllowed']},#{node['datasets'].join(",")}"
+  ini['Parameters']['DirsAllowed'] = "#{ini['Parameters']['DirsAllowed']},#{node['endpoint']['datasets'].join(",")}"
 
   # Read its current contents
   puts ini['Parameters']['DirsAllowed']
@@ -35,7 +35,7 @@ service "virtuoso" do
   action [ :enable, :start ]
 end
 
-node['datasets'].each { | dataset |
+node['endpoint']['datasets'].each { | dataset |
   bash "add_#{dataset}" do
     code <<-EOH
       echo "### Loading #{dataset} into virtuoso..."

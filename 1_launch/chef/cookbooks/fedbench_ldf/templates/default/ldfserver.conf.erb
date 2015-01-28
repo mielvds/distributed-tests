@@ -1,0 +1,15 @@
+#!upstart
+description "LDF Server"
+author      "Ruben Verborgh"
+
+env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+start on runlevel [23]
+stop on runlevel [!23]
+
+respawn
+
+script
+cd /home/ubuntu/ldf-server
+exec sudo ./bin/ldf-server ./config.json 80 1 &> log.txt
+end script

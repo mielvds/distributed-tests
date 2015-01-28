@@ -1,18 +1,19 @@
 {
   "title": "My Linked Data Fragments server",
-  "baseURL": "<%= @hostname %>",
+  "baseURL": "http://<%= @endpoint.hostname %>",
 
   "datasources": {
-    "<%= @source.name %>": {
-      "title": "<%= @source.title %>",
+    "<%= @endpoint.name %>": {
+      "title": "<%= @endpoint.name %>",
       "type": "HdtDatasource",
-      "description": "<%= @source.description %>",
-      "settings": { "file": "<%= @source.file %> }
+      "description": "Dataset <%= @endpoint.name %>",
+      "settings": { "file": "<%= @endpoint.datasets[0] %><%= @endpoint.name %>.hdt" }
     }
+
   },
 
   "dereference": {
-    "/resource/": "<%= @source.name %>"
+    "<%= @endpoint.dereference %>": "<%= @endpoint.name %>"
   },
 
   "routers": [
@@ -49,5 +50,13 @@
   "logging": {
     "enabled": true,
     "file": "access.log"
+  },
+
+  "discovery": {
+    "summary": true,
+    "explore": true,
+    "summaryScan": true
   }
+
+
 }
