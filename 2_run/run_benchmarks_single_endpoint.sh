@@ -6,7 +6,7 @@ mkdir ~/output
 mkdir ~/output/fedx
 mkdir ~/output/sesame
 mkdir ~/output/mmlab
-
+mkdir ~/output/direct
 
 cd
 
