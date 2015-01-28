@@ -6,10 +6,19 @@ bash 'set default locale to UTF-8' do
 end
 #
 # dont't prompt for host key verfication (if any)
-# template '/home/vagrant/.ssh/config' do
-#   mode '0600'
-#   source 'config'
-# end
+cookbook_file '/home/ubuntu/.ssh/config' do
+  mode '0600'
+  source 'config'
+end
+
+cookbook_file '/home/ubuntu/.ssh/aws.pub' do
+  mode '0400'
+  source 'aws.pub'
+end
+
+bash 'Add public key to authorized' do
+  code 'sudo cat /home/ubuntu/.ssh/aws.pub >> /home/ubuntu/.ssh/authorized_keys'
+end
 
 execute 'apt-get update'
 package 'python-software-properties'
@@ -111,7 +120,7 @@ bash 'run npm' do
   cd /home/ubuntu/ldf-server
   mkdir summaries
   sudo npm install
-  sudo forever start -o out.log  -e err.log  ./bin/ldf-server ./config.json 4000 1
+  sudo forever start -o out.log  -e /vagrant/#{node['endpoint']['name']}.csv  ./bin/ldf-server ./config.json 4000 1
   EOH
 end
 

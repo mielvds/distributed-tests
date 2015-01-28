@@ -23,13 +23,13 @@
     "name": "dbpedia",
     "ip": "10.0.0.11",
     "hostname" : "dbpedia.org",
-    "dereference" : "/resource/",
+    "dereference" : "/",
     "datasets": ["/data/dbpedia/"]
   }, {
     "name": "drugbank",
     "ip": "10.0.0.12",
     "hostname" : "www4.wiwiss.fu-berlin.de",
-    "dereference" : "/drugbank/",
+    "dereference" : "/",
     "datasets": ["/data/drugbank/"]
   }, {
     "name": "geonames",
@@ -41,13 +41,13 @@
     "name": "jamendo",
     "ip": "10.0.0.14",
     "hostname" : "dbtune.org",
-    "dereference" : "/jamendo/",
+    "dereference" : "/",
     "datasets": ["/data/jamendo/"]
   }, {
     "name": "linkedmdb",
     "ip": "10.0.0.15",
     "hostname" : "data.linkedmdb.org",
-    "dereference" : "/resource/",
+    "dereference" : "/",
     "datasets": ["/data/linkedmdb/"]
   }, {
     "name": "nytimes",
@@ -59,13 +59,13 @@
     "name": "sp2b",
     "ip": "10.0.0.17",
     "hostname" : "localhost",
-    "dereference" : "/resource/",
+    "dereference" : "/",
     "datasets": ["/data/sp2b/"]
   }, {
     "name": "swdf",
     "ip": "10.0.0.18",
     "hostname" : "data.semanticweb.org",
-    "dereference" : "/resource/",
+    "dereference" : "/",
     "datasets": ["/data/swdf/"]
   }]
 }
