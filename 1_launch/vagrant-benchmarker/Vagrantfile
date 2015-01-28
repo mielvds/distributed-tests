@@ -18,6 +18,7 @@ $script = "sudo mkdir /home/ubuntu/server-logs\n"
 $settings['endpoints'].each { |endpt|
   $script += "sudo scp -o StrictHostKeyChecking=no -i /vagrant/aws ubuntu@#{endpt['ip']}:/vagrant/*.csv /home/ubuntu/server-logs/\n"
   $script += "sudo scp -o StrictHostKeyChecking=no -r -i /vagrant/aws ubuntu@#{endpt['ip']}:ldf-server/summaries/ /home/ubuntu/server-logs/\n"
+  $script += "sudo scp -o StrictHostKeyChecking=no -r -i /vagrant/aws ubuntu@#{endpt['ip']}:ldf-server/logs/access.log /home/ubuntu/server-logs/#{endpt['ip']}-access.log\n"
 }
 
 Vagrant.configure(2) do |config|
