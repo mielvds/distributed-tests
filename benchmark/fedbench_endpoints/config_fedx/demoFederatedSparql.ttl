@@ -1,6 +1,6 @@
 @prefix fluid: <http://fluidops.org/config#>.
 
-<http://chebi> fluid:store "SPARQLEndpoint";
+<http://kegg-chebi> fluid:store "SPARQLEndpoint";
 fluid:SPARQLEndpoint "http://10.0.0.10:8891/sparql".
 
 <http://dbpedia> fluid:store "SPARQLEndpoint";
@@ -15,17 +15,14 @@ fluid:SPARQLEndpoint "http://10.0.0.13:8891/sparql".
 <http://jamendo> fluid:store "SPARQLEndpoint";
 fluid:SPARQLEndpoint "http://10.0.0.14:8891/sparql".
 
-<http://kegg> fluid:store "SPARQLEndpoint";
+<http://linkedmdb> fluid:store "SPARQLEndpoint";
 fluid:SPARQLEndpoint "http://10.0.0.15:8891/sparql".
 
-<http://linkedmdb> fluid:store "SPARQLEndpoint";
+<http://nytimes> fluid:store "SPARQLEndpoint";
 fluid:SPARQLEndpoint "http://10.0.0.16:8891/sparql".
 
-<http://nytimes> fluid:store "SPARQLEndpoint";
+<http://sp2b> fluid:store "SPARQLEndpoint";
 fluid:SPARQLEndpoint "http://10.0.0.17:8891/sparql".
 
-<http://sp2b> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "http://10.0.0.18:8891/sparql".
-
 <http://swdf> fluid:store "SPARQLEndpoint";
-fluid:SPARQLEndpoint "http://10.0.0.19:8891/sparql".
+fluid:SPARQLEndpoint "http://10.0.0.18:8891/sparql".
