@@ -14,6 +14,8 @@ else
   end
 end
 
+$script = "sudo apt-get update\n"
+$script = "sudo apt-get install default-jre\n"
 $script = "sudo mkdir /home/ubuntu/server-logs\n"
 $settings['endpoints'].each { |endpt|
   $script += "sudo scp -o StrictHostKeyChecking=no -i /vagrant/aws ubuntu@#{endpt['ip']}:/vagrant/*.csv /home/ubuntu/server-logs/\n"
