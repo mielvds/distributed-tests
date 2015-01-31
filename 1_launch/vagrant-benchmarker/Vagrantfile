@@ -39,6 +39,14 @@ Vagrant.configure(2) do |config|
 	end
 
   config.vm.define 'Benchmarker'
-  config.vm.provision "shell", path: "prepare-client.sh"
-  config.vm.provision "shell", path: "transfer.sh"
+
+  instance.vm.provision "chef_solo" do |chef|
+    chef.json = {
+      :endpoints => $settings['endpoints'],
+    }
+
+    chef.cookbooks_path = "../chef/cookbooks"
+    chef.add_recipe "client"
+
+  end
 end

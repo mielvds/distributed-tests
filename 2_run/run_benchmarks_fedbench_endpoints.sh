@@ -18,7 +18,7 @@ cp -R ./result /home/ubuntu/output/fedx
 
 # LDF
 cp -af ~/configuration_scripts_benchmarks/benchmark/fedbench_endpoints/config_ldf/* ./config/
-./runEval.sh/
+./runEval.sh
 
 # DO SMTH WITH OUTPUT
 cp -R ./result /home/ubuntu/output/ldf
