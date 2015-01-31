@@ -39,7 +39,8 @@
       "echo \"export AWS_SECRET_KEY={{user `aws_secret_key`}}\" >> /home/ubuntu/.profile",
       "echo \"export AWS_ACCESS_KEY={{user `aws_access_key`}}\" >> /home/ubuntu/.profile",
       "echo \"export AWS_S3_BUCKETNAME={{user `bucketname`}}\" >> /home/ubuntu/.profile",
-      "git clone https://github.com/laurensdv/configuration_scripts_benchmarks.git",
+      "git clone git@git.mmlab.be:distributed-querying/distributed-query-benchmarking-configuration-and-automation.git",
+      "mv ./distributed-query-benchmarking-configuration-and-automation ./configuration_scripts_benchmarks",
       "./configuration_scripts_benchmarks/0_build/base_setup.sh",
       "./configuration_scripts_benchmarks/0_build/get_data_generic.sh {{user `bucketname`}}"	
       ]
