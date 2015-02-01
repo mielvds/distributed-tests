@@ -25,7 +25,7 @@
 #	query sets can be combinated using comma as separator
 #	default: ALL
 #
-querySet = CROSSDOMAIN
+querySet = CROSSDOMAIN,LIFESCIENCEDOMAIN,SP2B,LINKEDDATA
 
 ###
 # dataConfig
@@ -105,7 +105,7 @@ reportStream = org.semanticweb.fbench.report.CsvRdfReportStream
 #	location of the environment properties used in RdfReportStream
 #
 #   default: config\\env.prop
-envConfig = ../env.prop
+envConfig = config/env.prop
 
 
 ###
