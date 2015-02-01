@@ -17,8 +17,10 @@ cp -af ~/configuration_scripts_benchmarks/benchmark/fedbench_endpoints/config_fe
 cp -R ./result /home/ubuntu/output/fedx
 
 # LDF
+cp -af /home/ubuntu/FedBench 3.0/federated-ldf/config-kegg-chebi.json /home/ubuntu/FedBench 3.0/federated-ldf/config-fedbench.json
 cp -af ~/configuration_scripts_benchmarks/benchmark/fedbench_endpoints/config_ldf/* ./config/
 ./runEval.sh
 
 # DO SMTH WITH OUTPUT
-cp -R ./result /home/ubuntu/output/ldf
+mkdir ./result /home/ubuntu/output/ldf/kegg-chebi/
+cp -R ./result /home/ubuntu/output/ldf/kegg-chebi/

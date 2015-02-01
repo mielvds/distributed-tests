@@ -19,23 +19,25 @@ bash 'Install node and npm' do
 end
 
 # install the nodejs server
-git '/home/ubuntu/Fedbench 3.0/federated-ldf' do
+git '/home/ubuntu/FedBench 3.0/federated-ldf' do
   repository 'http://git.mmlab.be/mvdrsand/discoveryclient.git'
   revision 'Federated-progressive'
   action :sync
+
 end
 
 bash 'Run npm' do
   code <<-EOH
-  cd /home/ubuntu/FedBench\ 3.0/federated-ldf
+  sudo chown -R ubuntu /home/ubuntu/FedBench\\ 3.0/federated-ldf
+  cd /home/ubuntu/FedBench\\ 3.0/federated-ldf
   npm install
   EOH
 end
 
 node['endpoints'].each{ |endpt|
   # Create JSON configuration
-  template '/home/ubuntu/FedBench\ 3.0/federated-ldf/config-fedbench.json' do
-    source "config-fedbench-#{endpt['name']}.json.erb"
+  template "/home/ubuntu/FedBench 3.0/federated-ldf/config-#{endpt['name']}.json" do
+    source "config-fedbench.json.erb"
     variables(
       :endpoint => endpt
     )

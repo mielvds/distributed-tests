@@ -2,7 +2,7 @@
   "subnet": "subnet-9bc563c2",
   "security_groups": ["sg-274ab743"],
   "ami": "ami-140f4b7c",
-  "ami_benchmarker": "ami-ec493f84",
+  "ami_benchmarker": "ami-804100e8",
   "ldf": {
     "enabled": true
   },
