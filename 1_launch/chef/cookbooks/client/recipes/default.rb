@@ -34,6 +34,14 @@ bash 'Run npm' do
   EOH
 end
 
+template "/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json" do
+  source "config-federated.json.erb"
+  variables(
+    :endpoints => node['endpoints']
+  )
+  mode 0664
+end
+
 node['endpoints'].each{ |endpt|
   # Create JSON configuration
   template "/home/ubuntu/FedBench 3.0/federated-ldf/config-#{endpt['name']}.json" do
@@ -44,3 +52,12 @@ node['endpoints'].each{ |endpt|
     mode 0664
   end
 }
+
+# Create /etc/hosts configuration
+template '/etc/hosts' do
+  source 'hosts.erb'
+  variables(
+    :endpoints => node['endpoints']
+  )
+  mode 0664
+end

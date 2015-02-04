@@ -1,0 +1,82 @@
+{
+  "subnet": "subnet-9bc563c2",
+  "security_groups": ["sg-274ab743"],
+  "ami": "ami-140f4b7c",
+  "ami_benchmarker": "ami-804100e8",
+  "ldf": {
+    "enabled": true,
+    "explore": false,
+    "summary": true
+  },
+  "virtuoso": {
+    "enabled": false,
+    "user": "dba",
+    "pass": "dba",
+    "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
+    "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
+  },
+  "endpoints": [{
+    "name": "kegg-chebi",
+    "ip": "10.0.0.10",
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/kegg-chebi/"]
+  }, {
+    "name": "dbpedia",
+    "ip": "10.0.0.11",
+    "hostname" : "dbpedia.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/dbpedia/"]
+  }, {
+    "name": "drugbank",
+    "ip": "10.0.0.12",
+    "hostname" : "www4.wiwiss.fu-berlin.de",
+    "dereference" : "/drugbank/resource/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/drugbank/"]
+  }, {
+    "name": "geonames",
+    "ip": "10.0.0.13",
+    "hostname" : "sws.geonames.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/geonames/"]
+  }, {
+    "name": "jamendo",
+    "ip": "10.0.0.14",
+    "hostname" : "dbtune.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/jamendo/"]
+  }, {
+    "name": "linkedmdb",
+    "ip": "10.0.0.15",
+    "hostname" : "data.linkedmdb.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/linkedmdb/"]
+  }, {
+    "name": "nytimes",
+    "ip": "10.0.0.16",
+    "hostname" : "data.nytimes.com",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/nytimes/"]
+  }, {
+    "name": "sp2b",
+    "ip": "10.0.0.17",
+    "hostname" : "localhost",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/sp2b/"]
+  }, {
+    "name": "swdf",
+    "ip": "10.0.0.18",
+    "hostname" : "data.semanticweb.org",
+    "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",
+    "datasets": ["/data/swdf/"]
+  }]
+}

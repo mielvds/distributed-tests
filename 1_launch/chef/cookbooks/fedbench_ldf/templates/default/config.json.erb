@@ -3,7 +3,7 @@
   "baseURL": "http://<%= @endpoint.hostname %>",
 
   "datasources": {
-    "<%= @endpoint.name %>": {
+    "fragments": {
       "title": "<%= @endpoint.name %>",
       "type": "HdtDatasource",
       "description": "Dataset <%= @endpoint.name %>",
@@ -13,7 +13,7 @@
   },
 
   "dereference": {
-    "<%= @endpoint.dereference %>": "<%= @endpoint.name %>"
+    "<%= @endpoint.dereference %>": "fragments"
   },
 
   "routers": [
@@ -53,9 +53,13 @@
   },
 
   "discovery": {
-    "summary": true,
-    "explore": true,
-    "summaryScan": true
+    "summary": <%= @summary %>,
+    "explore": <%= @explore %>,
+    "summaryScan": true,
+    "runs": ["21", "22"]
+    <% if @endpoint.index -%>
+    ,"indexFile": "<%= @endpoint.index %>"
+    <% end -%>
   }
 
 

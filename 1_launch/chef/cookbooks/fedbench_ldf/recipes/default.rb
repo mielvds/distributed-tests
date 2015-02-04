@@ -59,7 +59,9 @@ end
 template '/home/ubuntu/ldf-server/config.json' do
   source 'config.json.erb'
   variables(
-    :endpoint => node['endpoint']
+    :endpoint => node['endpoint'],
+    :summary => node['ldf']['summary'],
+    :explore => node['ldf']['explore']
   )
   mode 0664
 end

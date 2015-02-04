@@ -4,10 +4,12 @@
   "ami": "ami-140f4b7c",
   "ami_benchmarker": "ami-804100e8",
   "ldf": {
-    "enabled": true
+    "enabled": true,
+    "explore": true,
+    "summary": true
   },
   "virtuoso": {
-    "enabled": true,
+    "enabled": false,
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
@@ -29,7 +31,7 @@
     "name": "drugbank",
     "ip": "10.0.0.12",
     "hostname" : "www4.wiwiss.fu-berlin.de",
-    "dereference" : "/",
+    "dereference" : "/drugbank/resource/",
     "datasets": ["/data/drugbank/"]
   }, {
     "name": "geonames",

@@ -28,7 +28,8 @@ def provision_server (config, endpt)
         :hostname => $settings['hostname'],
         :endpoints => $settings['endpoints'],
 			  :endpoint => endpt,
-        :virtuoso => $settings['virtuoso']
+        :virtuoso => $settings['virtuoso'],
+        :ldf => $settings['ldf'],
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
