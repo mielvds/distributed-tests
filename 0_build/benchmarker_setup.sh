@@ -37,7 +37,7 @@ cd federated-ldf
 git checkout Federated-progressive
 sudo chown -R ubuntu /home/ubuntu/FedBench\ 3.0/federated-ldf
 cd /home/ubuntu/FedBench\ 3.0/federated-ldf
-npm install
+sudo npm install
 
 
 cd
