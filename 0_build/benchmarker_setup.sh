@@ -35,7 +35,7 @@ cd /home/ubuntu/FedBench\ 3.0/
 git clone http://git.mmlab.be/mvdrsand/discoveryclient.git federated-ldf
 cd federated-ldf
 git checkout Federated-progressive
-sudo chown -R ubuntu /home/ubuntu/FedBench 3.0/federated-ldf
+sudo chown -R ubuntu /home/ubuntu/FedBench\ 3.0/federated-ldf
 cd /home/ubuntu/FedBench\ 3.0/federated-ldf
 npm install
 
