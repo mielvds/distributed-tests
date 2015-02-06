@@ -1,9 +1,4 @@
-bash 'set default locale to UTF-8' do
-  code <<-EOH
-  update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-  dpkg-reconfigure locales
-  EOH
-end
+
 #
 # dont't prompt for host key verfication (if any)
 cookbook_file '/home/ubuntu/.ssh/config' do
@@ -20,33 +15,33 @@ bash 'Add public key to authorized' do
   code 'sudo cat /home/ubuntu/.ssh/aws.pub >> /home/ubuntu/.ssh/authorized_keys'
 end
 
-execute 'apt-get update'
-package 'python-software-properties'
-
-# install the software we need
-%w(
-curl
-vim
-git
-build-essential
-openssl
-libssl-dev
-).each { | pkg | package pkg }
+# execute 'apt-get update'
+# package 'python-software-properties'
+#
+# # install the software we need
+# %w(
+# curl
+# vim
+# git
+# build-essential
+# openssl
+# libssl-dev
+# ).each { | pkg | package pkg }
 
 cookbook_file '/home/ubuntu/.bash_profile' do
   source '.bash_profile'
 end
 
-bash 'Install node and npm' do
-  code <<-EOH
-  curl -sL https://deb.nodesource.com/setup | sudo bash -
-  sudo apt-get install -y nodejs
-  npm install -g node-gyp # Install the "node-gyp" globally.
-  cd ~
-  npm update # Update your personal npm local repository again.
-  npm -g install forever
-  EOH
-end
+# bash 'Install node and npm' do
+#   code <<-EOH
+#   curl -sL https://deb.nodesource.com/setup | sudo bash -
+#   sudo apt-get install -y nodejs
+#   npm install -g node-gyp # Install the "node-gyp" globally.
+#   cd ~
+#   npm update # Update your personal npm local repository again.
+#   npm -g install forever
+#   EOH
+# end
 
 # install the nodejs server
 git '/home/ubuntu/ldf-server' do
@@ -119,9 +114,9 @@ end
 # install NPM dependencies
 bash 'run npm' do
   code <<-EOH
-  cd /home/ubuntu/ldf-server
-  mkdir summaries
-  sudo npm install
+  # cd /home/ubuntu/ldf-server
+  # mkdir summaries
+  # sudo npm install
   sudo forever start -o out.log  -e /vagrant/#{node['endpoint']['name']}.csv  ./bin/ldf-server ./config.json 4000 1
   EOH
 end

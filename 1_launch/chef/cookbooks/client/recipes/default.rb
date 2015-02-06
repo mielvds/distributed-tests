@@ -1,38 +1,38 @@
-%w(
-curl
-vim
-git
-build-essential
-openssl
-libssl-dev
-default-jre
-).each { | pkg | package pkg }
+# %w(
+# curl
+# vim
+# git
+# build-essential
+# openssl
+# libssl-dev
+# default-jre
+# ).each { | pkg | package pkg }
 
-bash 'Install node and npm' do
-  code <<-EOH
-  curl -sL https://deb.nodesource.com/setup | sudo bash -
-  sudo apt-get install -y nodejs
-  npm install -g node-gyp # Install the "node-gyp" globally.
-  cd ~
-  npm update # Update your personal npm local repository again.
-  EOH
-end
+# bash 'Install node and npm' do
+#   code <<-EOH
+#   curl -sL https://deb.nodesource.com/setup | sudo bash -
+#   sudo apt-get install -y nodejs
+#   npm install -g node-gyp # Install the "node-gyp" globally.
+#   cd ~
+#   npm update # Update your personal npm local repository again.
+#   EOH
+# end
 
 # install the nodejs server
-git '/home/ubuntu/FedBench 3.0/federated-ldf' do
-  repository 'http://git.mmlab.be/mvdrsand/discoveryclient.git'
-  revision 'Federated-progressive'
-  action :sync
-
-end
-
-bash 'Run npm' do
-  code <<-EOH
-  sudo chown -R ubuntu /home/ubuntu/FedBench\\ 3.0/federated-ldf
-  cd /home/ubuntu/FedBench\\ 3.0/federated-ldf
-  npm install
-  EOH
-end
+# git '/home/ubuntu/FedBench 3.0/federated-ldf' do
+#   repository 'http://git.mmlab.be/mvdrsand/discoveryclient.git'
+#   revision 'Federated-progressive'
+#   action :sync
+#
+# end
+#
+# bash 'Run npm' do
+#   code <<-EOH
+#   sudo chown -R ubuntu /home/ubuntu/FedBench\\ 3.0/federated-ldf
+#   cd /home/ubuntu/FedBench\\ 3.0/federated-ldf
+#   npm install
+#   EOH
+# end
 
 template "/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json" do
   source "config-federated.json.erb"
