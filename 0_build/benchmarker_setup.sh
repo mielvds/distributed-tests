@@ -18,7 +18,7 @@ sudo /usr/sbin/update-locale
 # Install node and npm
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
-npm install -g node-gyp # Install the "node-gyp" globally.
+sudo npm install -g node-gyp # Install the "node-gyp" globally.
 cd ~
 npm update # Update your personal npm local repository again.
 
@@ -33,9 +33,10 @@ unzip FedBench\ 3.0.zip -d /home/ubuntu/FedBench\ 3.0/
 cd /home/ubuntu/FedBench\ 3.0/
 
 git clone http://git.mmlab.be/mvdrsand/discoveryclient.git federated-ldf
+cd federated-ldf
 git checkout Federated-progressive
-sudo chown -R ubuntu /home/ubuntu/FedBench\\ 3.0/federated-ldf
-cd /home/ubuntu/FedBench\\ 3.0/federated-ldf
+sudo chown -R ubuntu /home/ubuntu/FedBench 3.0/federated-ldf
+cd /home/ubuntu/FedBench\ 3.0/federated-ldf
 npm install
 
 
