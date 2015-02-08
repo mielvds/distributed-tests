@@ -40,6 +40,11 @@ cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json
   mode 0664
 end
 
+cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/ldf-client.js' do
+  source 'ldf-client-naive.js'
+  mode 0664
+end
+
 node['endpoints'].each{ |endpt|
   # Create JSON configuration
   template "/home/ubuntu/FedBench 3.0/federated-ldf/config-#{endpt['name']}.json" do

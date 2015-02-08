@@ -65,15 +65,8 @@
     "index" : "/vagrant/indexes/full.index",
     "datasets": ["/data/nytimes/"]
   }, {
-    "name": "sp2b",
-    "ip": "10.0.0.17",
-    "hostname" : "localhost",
-    "dereference" : "/",
-    "index" : "/vagrant/indexes/full.index",
-    "datasets": ["/data/sp2b/"]
-  }, {
     "name": "swdf",
-    "ip": "10.0.0.18",
+    "ip": "10.0.0.17",
     "hostname" : "data.semanticweb.org",
     "dereference" : "/",
     "index" : "/vagrant/indexes/full.index",

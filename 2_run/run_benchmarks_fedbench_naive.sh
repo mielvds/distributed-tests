@@ -15,6 +15,7 @@ chmod +x ./runEval.sh
 
 # DO SMTH WITH OUTPUT
 #cp -R ./result /home/ubuntu/output/fedx
+cp cp -af /home/ubuntu/FedBench\ 3.0/federated-ldf/ldf-client-naive.js /home/ubuntu/FedBench\ 3.0/federated-ldf/ldf-client.js
 
 cp -af ~/configuration_scripts_benchmarks/benchmark/fedbench_endpoints/config_ldf/* ./config/
 
