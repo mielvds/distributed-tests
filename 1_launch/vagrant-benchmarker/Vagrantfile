@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
 		aws.ebs_optimized = "false"
 		aws.ami = $settings['ami_benchmarker']
 
-		aws.instance_type = "c3.medium"
+		aws.instance_type = "c3.large"
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = ENV['SSH_KEY'] #should not be necessary as aws key is given
 	end

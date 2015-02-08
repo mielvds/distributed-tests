@@ -40,8 +40,8 @@ cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json
   mode 0664
 end
 
-cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/ldf-client.js' do
-  source 'ldf-client-naive.js'
+cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/ldf-client-naive.js' do
+  source 'ldf-client.js'
   mode 0664
 end
 
