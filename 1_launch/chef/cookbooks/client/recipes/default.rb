@@ -34,11 +34,9 @@
 #   EOH
 # end
 
-template "/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json" do
-  source "config-federated.json.erb"
-  variables(
-    :endpoints => node['endpoints']
-  )
+
+cookbook_file '/home/ubuntu/FedBench 3.0/federated-ldf/config-federated-all.json' do
+  source 'config-federated.json'
   mode 0664
 end
 
