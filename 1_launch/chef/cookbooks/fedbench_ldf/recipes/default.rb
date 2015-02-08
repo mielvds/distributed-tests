@@ -32,16 +32,16 @@ cookbook_file '/home/ubuntu/.bash_profile' do
   source '.bash_profile'
 end
 
-# bash 'Install node and npm' do
-#   code <<-EOH
-#   curl -sL https://deb.nodesource.com/setup | sudo bash -
-#   sudo apt-get install -y nodejs
-#   npm install -g node-gyp # Install the "node-gyp" globally.
-#   cd ~
-#   npm update # Update your personal npm local repository again.
-#   npm -g install forever
-#   EOH
-# end
+bash 'Install node and npm' do
+  code <<-EOH
+  #curl -sL https://deb.nodesource.com/setup | sudo bash -
+  sudo apt-get install -y nodejs
+  npm install -g node-gyp # Install the "node-gyp" globally.
+  cd ~
+  npm update # Update your personal npm local repository again.
+  npm -g install forever
+  EOH
+end
 
 # install the nodejs server
 git '/home/ubuntu/ldf-server' do
@@ -106,17 +106,18 @@ cookbook_file "/etc/nginx/sites-enabled/default.conf" do
 end
 
 # Get perfmon
-remote_file '/perfmon-2.1b1.tgz' do
-  source 'http://softlayer-ams.dl.sourceforge.net/project/perfmon/perfmon/2.1b1/perfmon-2.1b1.tgz'
-  action :create_if_missing
-end
+# remote_file '/perfmon-2.1b1.tgz' do
+#   source 'http://softlayer-ams.dl.sourceforge.net/project/perfmon/perfmon/2.1b1/perfmon-2.1b1.tgz'
+#   action :create_if_missing
+# end
 
 # install NPM dependencies
 bash 'run npm' do
   code <<-EOH
-  # cd /home/ubuntu/ldf-server
-  # mkdir summaries
-  # sudo npm install
+  cd /home/ubuntu/ldf-server
+  sudo git pull
+  mkdir summaries
+  sudo npm install
   sudo forever start -o out.log  -e /vagrant/#{node['endpoint']['name']}.csv  ./bin/ldf-server ./config.json 4000 1
   EOH
 end

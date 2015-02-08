@@ -1,8 +1,8 @@
 {
-  "subnet": "subnet-9bc563c2",
-  "security_groups": ["sg-274ab743"],
-  "ami": "ami-140f4b7c",
-  "ami_benchmarker": "ami-804100e8",
+  "subnet": "subnet-fc423ac6",
+  "security_groups": ["sg-3928855d"],
+  "ami": "ami-362a645e",
+  "ami_benchmarker": "ami-b2511eda",
   "ldf": {
     "enabled": true,
     "explore": true,

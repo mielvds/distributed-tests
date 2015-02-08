@@ -1,30 +1,31 @@
 {
-  "subnet": "subnet-9bc563c2",
-  "security_groups": ["sg-274ab743"],
-  "ami": "ami-140f4b7c",
-  "ami_benchmarker": "ami-804100e8",
+  "subnet": "subnet-fc423ac6",
+  "security_groups": ["sg-3928855d"],
+  "ami": "ami-362a645e",
+  "ami_benchmarker": "ami-b2511eda",
   "ldf": {
-    "enabled": true
+    "enabled": true,
+    "explore": true,
+    "summary": true
   },
   "virtuoso": {
-    "enabled": true,
+    "enabled": false,
     "user": "dba",
     "pass": "dba",
     "config": "/home/ubuntu/progs/virtuoso-opensource-bin/var/lib/virtuoso/db/virtuoso.ini",
     "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
   },
   "endpoints": [{
-    "name": "drugbank",
-    "ip": "10.0.0.21",
-    "hostname" : "www4.wiwiss.fu-berlin.de",
-    "dereference" : "/drugbank/",
-    "datasets": ["/data/drugbank/"]
-  },
-  {
-    "name": "kegg",
-    "ip": "10.0.0.15",
+    "name": "kegg-chebi",
+    "ip": "10.0.0.10",
     "hostname" : "bio2rdf.org",
     "dereference" : "/",
-    "datasets": ["/data/kegg/"]
-    }]
+    "datasets": ["/data/kegg-chebi/"]
+  }, {
+    "name": "drugbank",
+    "ip": "10.0.0.12",
+    "hostname" : "www4.wiwiss.fu-berlin.de",
+    "dereference" : "/drugbank/resource/",
+    "datasets": ["/data/drugbank/"]
+  }]
 }

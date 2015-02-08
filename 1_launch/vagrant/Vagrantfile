@@ -33,13 +33,13 @@ def provision_server (config, endpt)
 		  }
 
 		  chef.cookbooks_path = "../chef/cookbooks"
-      if $settings['virtuoso'].nil? || $settings['virtuoso']['enabled'].nil? || $settings['virtuoso']['enabled']
-        chef.add_recipe "fedbench_virtuoso"
-      end
+      # if $settings['virtuoso'].nil? || $settings['virtuoso']['enabled'].nil? || $settings['virtuoso']['enabled']
+      #   chef.add_recipe "fedbench_virtuoso"
+      # end
 
-      if $settings['ldf'].nil? || $settings['ldf']['enabled'].nil? || $settings['virtuoso']['enabled']
+      #if $settings['ldf'].nil? || $settings['ldf']['enabled'].nil? || $settings['virtuoso']['enabled']
         chef.add_recipe "fedbench_ldf"
-      end
+      #end
     end
   end
 end
@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
 		aws.keypair_name = ENV['SSH_KEYNAME']
 		aws.region = "us-east-1"
 		aws.block_device_mapping = [{ 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 160, 'Ebs.VolumeType' => 'gp2' }]
-		aws.ebs_optimized = "true"
+		aws.ebs_optimized = "false"
 		aws.security_groups = $settings['security_groups']
 		aws.subnet_id = $settings['subnet']
 #		aws.elastic_ip = "true"
@@ -63,7 +63,7 @@ Vagrant.configure(2) do |config|
 #		The following image has already virtuoso installed.
 		aws.ami = $settings['ami']
 
-		aws.instance_type = "m3.xlarge"
+		aws.instance_type = "m3.large"
 		override.ssh.username = "ubuntu"
 		override.ssh.private_key_path = ENV['SSH_KEY'] #should not be necessary as aws key is given
 	end

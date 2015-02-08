@@ -11,7 +11,7 @@
   "secret_key": "{{user `aws_secret_key`}}",
   "region": "us-east-1",
   "source_ami": "ami-148a2c7c",
-  "instance_type": "c3.xlarge",
+  "instance_type": "c3.large",
   "ssh_username": "ubuntu",
   "ami_name": "data-endpoint",
   "tags": {

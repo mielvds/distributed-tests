@@ -15,20 +15,23 @@ sudo dpkg-reconfigure locales
 sudo touch /root/.locale-fixed
 sudo /usr/sbin/update-locale
 
+sudo chown -R ubuntu /usr/lib/
+
 # Node & NPM
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install -y nodejs
-npm install -g node-gyp # Install the "node-gyp" globally.
-cd ~
-npm update # Update your personal npm local repository again.
-npm -g install forever
+#curl -sL https://deb.nodesource.com/setup | sudo bash -
+#sudo apt-get install -y nodejs
+#sudo chown -R ubuntu ~/.npm
+#npm install -g node-gyp # Install the "node-gyp" globally.
+#cd ~
+#npm update # Update your personal npm local repository again.
+#npm -g install forever
 
 # LDF Server
-git clone http://git.mmlab.be/mvdrsand/discoveryserver.git /home/ubuntu/ldf-server
-cd /home/ubuntu/ldf-server
-git checkout discovery
-mkdir summaries
-sudo npm install
+#git clone http://git.mmlab.be/mvdrsand/discoveryserver.git /home/ubuntu/ldf-server
+#cd /home/ubuntu/ldf-server
+#git checkout discovery
+#mkdir summaries
+#sudo npm install
 
 # Data Partition Configuration
 sudo mkdir /data
