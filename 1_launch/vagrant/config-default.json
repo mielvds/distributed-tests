@@ -20,12 +20,7 @@
     "ip": "10.0.0.10",
     "hostname" : "bio2rdf.org",
     "dereference" : "/",
+    "index" : "/vagrant/indexes/full.index",vag
     "datasets": ["/data/kegg-chebi/"]
-  }, {
-    "name": "drugbank",
-    "ip": "10.0.0.12",
-    "hostname" : "www4.wiwiss.fu-berlin.de",
-    "dereference" : "/drugbank/resource/",
-    "datasets": ["/data/drugbank/"]
   }]
 }

@@ -58,12 +58,6 @@
     "dereference" : "/",
     "datasets": ["/data/nytimes/"]
   }, {
-    "name": "sp2b",
-    "ip": "10.0.0.17",
-    "hostname" : "localhost",
-    "dereference" : "/",
-    "datasets": ["/data/sp2b/"]
-  }, {
     "name": "swdf",
     "ip": "10.0.0.18",
     "hostname" : "data.semanticweb.org",

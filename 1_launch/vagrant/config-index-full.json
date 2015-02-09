@@ -66,7 +66,7 @@
     "datasets": ["/data/nytimes/"]
   }, {
     "name": "swdf",
-    "ip": "10.0.0.17",
+    "ip": "10.0.0.18",
     "hostname" : "data.semanticweb.org",
     "dereference" : "/",
     "index" : "/vagrant/indexes/full.index",
