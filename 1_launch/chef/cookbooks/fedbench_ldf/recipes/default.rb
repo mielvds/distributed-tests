@@ -45,8 +45,8 @@ end
 
 # install the nodejs server
 git '/home/ubuntu/ldf-server' do
-  repository 'http://git.mmlab.be/mvdrsand/discoveryserver.git'
-  revision 'discovery'
+  repository 'https://github.com/LinkedDataFragments/Server.js.git'
+  revision 'master'
   action :sync
 end
 

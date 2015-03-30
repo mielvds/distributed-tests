@@ -16,11 +16,17 @@
     "isql": "/home/ubuntu/progs/virtuoso-opensource-bin/bin/isql"
   },
   "endpoints": [{
-    "name": "kegg-chebi",
+    "name": "kegg",
     "ip": "10.0.0.10",
     "hostname" : "bio2rdf.org",
     "dereference" : "/",
-    "datasets": ["/data/kegg-chebi/"]
+    "datasets": ["/data/kegg/"]
+  },{
+    "name": "chebi",
+    "ip": "10.0.0.19",
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "datasets": ["/data/chebi/"]
   }, {
     "name": "dbpedia",
     "ip": "10.0.0.11",
