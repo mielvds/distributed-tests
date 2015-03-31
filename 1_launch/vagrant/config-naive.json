@@ -21,12 +21,6 @@
     "hostname" : "bio2rdf.org",
     "dereference" : "/",
     "datasets": ["/data/kegg/"]
-  },{
-    "name": "chebi",
-    "ip": "10.0.0.19",
-    "hostname" : "bio2rdf.org",
-    "dereference" : "/",
-    "datasets": ["/data/chebi/"]
   }, {
     "name": "dbpedia",
     "ip": "10.0.0.11",
@@ -65,9 +59,15 @@
     "datasets": ["/data/nytimes/"]
   }, {
     "name": "swdf",
-    "ip": "10.0.0.18",
+    "ip": "10.0.0.17",
     "hostname" : "data.semanticweb.org",
     "dereference" : "/",
     "datasets": ["/data/swdf/"]
+  }, {
+    "name": "chebi",
+    "ip": "10.0.0.18",
+    "hostname" : "bio2rdf.org",
+    "dereference" : "/",
+    "datasets": ["/data/chebi/"]
   }]
 }
