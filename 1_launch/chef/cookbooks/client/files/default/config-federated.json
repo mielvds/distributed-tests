@@ -1,5 +1,11 @@
 {
-  "startFragment": ["http://bio2rdf.org/fragments", "http://dbpedia.org/fragments", "http://www4.wiwiss.fu-berlin.de/fragments", "http://sws.geonames.org/fragments", "http://dbtune.org/fragments", "http://data.linkedmdb.org/fragments", "http://data.nytimes.com/fragments", "http://data.semanticweb.org/fragments"],
+  "startFragment": [
+    "http://10.0.0.10/fragments",
+    "http://10.0.0.11/fragments",
+    "http://10.0.0.12/fragments",
+    "http://10.0.0.13/fragments", "http://10.0.0.14/fragments", "http://10.0.0.15/fragments",
+    "http://10.0.0.16/fragments", "http://10.0.0.17/fragments", "http://10.0.0.18/fragments"
+  ],
   "prefixes": {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",

@@ -57,10 +57,10 @@ node['endpoints'].each{ |endpt|
 }
 
 # Create /etc/hosts configuration
-template '/etc/hosts' do
-  source 'hosts.erb'
-  variables(
-    :endpoints => node['endpoints']
-  )
-  mode 0664
-end
+# template '/etc/hosts' do
+#   source 'hosts.erb'
+#   variables(
+#     :endpoints => node['endpoints']
+#   )
+#   mode 0664
+# end

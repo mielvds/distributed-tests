@@ -1,6 +1,6 @@
 {
   "title": "My Linked Data Fragments server",
-  "baseURL": "http://<%= @endpoint.hostname %>",
+  "baseURL": "http://<%= @endpoint.ip %>/fragments",
 
   "datasources": {
     "fragments": {
@@ -10,10 +10,6 @@
       "settings": { "file": "<%= @endpoint.datasets[0] %><%= @endpoint.name %>.hdt" }
     }
 
-  },
-
-  "dereference": {
-    "<%= @endpoint.dereference %>": "fragments"
   },
 
   "routers": [
